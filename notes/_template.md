@@ -2,10 +2,30 @@
 
 - title:
 - authors:
+- year:
+- era: classic | llm
 - venue:
+- venue_type: conference | journal | workshop | journal-first | preprint | thesis
 - url:
+- code_url:
+- institution:
+- aka:
+- door: gui | code | both | survey
+- question: generate | oracle | adequacy | eval | repair
+- platform: android | ios | web | desktop | unit | repo | multi
+- method: random | search | rl | llm-prompt | multi-agent | trained | static-analysis | hybrid | benchmark
+- oracle_type: crash | assertion | metamorphic | differential | spec | llm-judge | human
+- bug_type: crash | functional | display | flaky | security
+- benchmark:
+- baselines:
+- headline_result:
+- one_liner:
+- use_in_survey:
+- concepts:
+- priority: must | should | maybe
 - read_depth: unread | abstract | full
 - owner:
+- status: reading | extracted | checked
 
 ## 一段话介绍
 
@@ -43,7 +63,7 @@
 
 ## 原文摘录
 
-> 
+>
 > — Sec , p.
 
 ## 局限
