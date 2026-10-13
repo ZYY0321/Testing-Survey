@@ -7,11 +7,14 @@
 - venue:
 - venue_type: conference | journal | workshop | journal-first | preprint | thesis
 - url:
+- pdf_url:
+- version:
 - code_url:
 - institution:
 - aka:
 - door: gui | code | both | survey
-- question: generate | oracle | adequacy | eval | repair
+- question: generate | execute | oracle | adequacy | maintain | eval | repair
+- contribution_type: problem | empirical | method | benchmark | harness | replication | survey
 - platform: android | ios | web | desktop | unit | repo | multi
 - method: random | search | rl | llm-prompt | multi-agent | trained | static-analysis | hybrid | benchmark
 - oracle_type: crash | assertion | metamorphic | differential | spec | llm-judge | human
@@ -29,7 +32,7 @@
 
 ## 一段话介绍
 
-用我们自己的话。先说它打测试三问里的哪一问，再说它怎么打。
+用我们自己的话。先说它解决哪个测试任务，再说它怎么解决。字段中的候选值只保留适用项；`question` 和 `contribution_type` 第一项为主标签。信息不足时写「待核实」，不凭摘要补猜实验细节。
 
 ## 原文摘要
 
@@ -42,6 +45,8 @@
 ## 贡献
 
 按论文自己的编号写。每条一句。
+
+`contribution_type` 记录贡献类型，下面记录具体贡献。注明分类依据所在的章节或贡献段；提出方法、复用评测集和提供实现代码应分别判断。
 
 1.
 2.
