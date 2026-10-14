@@ -1,6 +1,6 @@
 # GPTDroid：让 LLM 连贯探索 Android 应用
 
-**本文先讲清楚方法，再保留原文数字和核对依据。** 不认识的英文词可查 [术语表](../glossary.md)；输入结构与截图的区别见 [layout](../glossary.md#layout)，判定机制见 [oracle](../field.md#oracle)。
+**本文先讲清楚方法，再保留原文数字和核对依据。** 不认识的英文词可查 [术语表](../field.md#gui-terms)；输入结构与截图的区别见 [layout](../field.md#layout)，判定机制见 [oracle](../field.md#oracle)。
 
 ## 先把作者要解决的问题讲明白
 

@@ -1,6 +1,6 @@
 # Trong 综述：LLM 在 GUI 测试流程里承担什么工作
 
-这篇作为流程补充，放在 [Yu](yu2025guisurvey.md) 和 [GPTDroid](liu2024gptdroid.md) 后读。它不发布新的最强测试器。术语见 [术语表](../glossary.md)，判定/维护机制见 [field](../field.md)。
+这篇作为流程补充，放在 [Yu](yu2025guisurvey.md) 和 [GPTDroid](liu2024gptdroid.md) 后读。它不发布新的最强测试器。术语见 [术语表](../field.md#gui-terms)，判定/维护机制见 [field](../field.md)。
 
 ## 先区分操作能力与测试能力
 
@@ -189,13 +189,13 @@ Discussion 的可靠性、上下文、交互和成本问题连接上述各阶段
 
 ## 初学者怎样用
 
-放在 CSUR 与 GPTDroid 后，按需读生命周期中的 oracle/维护段落。你不用背模型/Agent 分布或通用操作数据集；先看每个环节到底产出什么测试证据即可。
+放在 CSUR 与 GPTDroid 后，按需读生命周期中的 oracle/维护段落。不必记忆模型/Agent 分布或通用操作数据集；先看每个环节到底产出什么测试证据即可。
 
 ## 所读版本与核对范围
 
 2026-10-14：通读 [出版方原文的备用全文展示](https://www.researchgate.net/publication/404589627_A_process-centric_review_of_large_language_models_in_graphical_user_interface_testing_architectures_lifecycle_impact_and_challenges) 的正文，包括背景、方法、结果、生命周期、数据集、讨论与结论；重点核对 Tables 3/5/6 的文字。页码按正式原文页脚。没有独立核验全部 55 项研究、复做编码或复现系统，也没有完成所有图像原件的视觉核查。
 
-下文只保留 GUI 测试有关信息。略去通用 AI 背景和与项目无关的行业讨论。full 是本篇正文阅读状态，extracted 仍待用户复核。
+下文只保留 GUI 测试有关信息。略去通用 AI 背景和与项目无关的行业讨论。full 是本篇正文阅读状态，extracted 仍待交叉复核。
 
 ## 书目与分类（记录用）
 
