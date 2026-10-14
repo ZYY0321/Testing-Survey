@@ -4,3 +4,7 @@
 
 | id | 标题 | 年 | 场合 | 哪一问 | 笔记 |
 |---|---|---|---|---|---|
+| yu2025guisurvey | Vision-Based Mobile App GUI Testing: A Survey | 在线 2025 / 卷期 2026 | ACM Computing Surveys | generate（综述跨任务；主线入口） | [笔记](notes/yu2025guisurvey.md) |
+| liu2024gptdroid | Make LLM a Testing Expert: Bringing Human-like Interaction to Mobile GUI Testing via Functionality-aware Decisions | 2024（预印本首发 2023） | ICSE Research Track | generate（LLM 探索；crash 评测） | [笔记](notes/liu2024gptdroid.md) |
+| kong2019android | Automated Testing of Android Apps: A Systematic Literature Review | 2019 | IEEE Transactions on Reliability | generate（综述跨任务） | [笔记](notes/kong2019android.md) |
+| trong2026guilifecycle | A process-centric review of large language models in graphical user interface testing: architectures, lifecycle impact, and challenges | 2026 | PeerJ Computer Science | generate（综述跨任务） | [笔记](notes/trong2026guilifecycle.md) |
