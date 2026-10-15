@@ -2,6 +2,18 @@
 
 这些解释服务于 GUI 探索、执行、判定、维护、评测及文献组织。先用 [field.md](field.md) 理解领域，再遇词查本页。教学例子与论文结果分开；术语定义不能代替论文效果证据。
 
+<a id="ata-evaluation"></a>
+
+## ATA / verdict / step alignment：测试代理、判定与失败步骤对齐
+
+自主测试代理（ATA）接收给定步骤与预期，按序执行并检查断言；自主操作代理（AWA）通常以完成用户目标为主要标准。Verdict 指通过/失败标签。两者都能操作界面，但任务完成本身不能证明中间断言得到验证。
+
+以“应失败”为正类时，Sensitivity（灵敏度/Recall）衡量失败用例被正确报失败的比例；Specificity（特异度）衡量通过用例被正确判通过的比例。二者不可互换，也不等于报告 Precision。
+
+失败步骤对齐检查模型与人是否在同一步失败。自编例子：规格要求第 5 步的价格应为 30，但实际是 40；Agent 若第 2 步就因点错而停止，最终 fail 虽相同，却没有检验价格错误。Chevrot 等将这种“结论相同、原因错位”纳入 Type III error，并提出 TruAcc 收紧评价。停止在同一步仍不能证明同一根因，passing 用例是否跳过断言也需额外证据。
+
+出处：[Are Autonomous Web Agents Good Testers? 笔记](notes/chevrot2025webagents.md)，所读 arXiv v1 Section 4.4；该版本公式与结果表存在计算口径疑点，术语解释不代表数字已复现。
+
 **第一次只需要：** [layout](#layout)、[控件树](#view-hierarchy)、[Activity](#activity)、[状态图](#state-graphs)、[覆盖率](#coverage)、[oracle/真值](#truth)、[baseline/消融](#baseline)。其余按笔记出现的位置查阅。
 
 <a id="layout"></a>
