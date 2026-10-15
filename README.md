@@ -8,6 +8,7 @@
 | [field.md](field.md) | 综述论文与领域地图；每篇综述单独成表，不把不同综述硬塞进同一行 |
 | [glossary.md](glossary.md) | GUI testing 术语；阅读笔记遇到生词时查询 |
 | `notes/<id>.md` | 单篇论文的完整分析、实验核对、原文摘录与版本说明 |
+| [examples/](examples/README.md) | 大表写法示例与填写要求；新加一行前先对照这里 |
 
 ## 记录规则
 
@@ -20,7 +21,7 @@
 
 ## `catalog.md` 的列
 
-具体方向论文统一使用以下列，版式与 `gui-testing examples.md` 保持一致：
+具体方向论文统一使用以下列，版式与 [examples/](examples/README.md) 保持一致：
 
 | 列 | 写什么 |
 |---|---|
@@ -62,5 +63,5 @@
 
 1. 先查 `catalog.md` 与 `field.md`，避免重复。
 2. 复制 [notes/_template.md](notes/_template.md)，文件名使用 `第一作者姓年份关键词.md`。
-3. 按论文类型更新 `catalog.md` 或 `field.md`。
+3. 按论文类型更新 `catalog.md` 或 `field.md`；填写前先对照 [examples/](examples/README.md)。
 4. 检查链接、数字分母、版本和原文摘录后再提交。
