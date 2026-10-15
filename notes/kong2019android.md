@@ -1,6 +1,6 @@
 # Kong 综述：怎样把 GUI 测试问题与方法分开
 
-**这篇用于补传统背景。** 它的研究范围比 GUI 大，因此本笔记只解释有助于 GUI 调研的部分。基础概念见 [field](../field.md)，英文词见 [术语表](../field.md#gui-terms)。
+**这篇用于补传统背景。** 它的研究范围比 GUI 大，因此本笔记只解释有助于 GUI 调研的部分。基础概念见 [field](../field.md)，英文词见 [术语表](../glossary.md)。
 
 ## 为什么我们的原分类容易让人困惑
 
@@ -42,9 +42,12 @@
 
 本篇讨论 Android 自动化测试整体，GUI 是其中重要对象。最有用的是把“检查什么质量”“测哪个对象”“在哪个层级测”“用什么方法测”分开。将 GUI、回归、安全、静态分析直接并列，会混合这些维度。可以借它校准分类，不能照搬历史比例描述今天。
 
-## 原文摘要
+## 原文摘要关键句（节选）
 
-见正式 PDF 第 1 页 / 印刷页 45，不复制全文。
+> “we perform a detailed overview on the current state of research in testing Android apps”
+> — Abstract，PDF p.1 / 印刷页 45
+
+这里的研究对象是 Android app testing 整体，因此本仓库只取其中能解释 GUI/Event、代码参与、执行环境与评测的部分。
 
 ## 动机
 
@@ -182,9 +185,6 @@ Section V-C-1 的 mutation 包含事件/输入的变异以搜索新路径。它�
 作者另提出验证应用更新、应对 Android 碎片化、联合考虑代码与测试优先级。是否仍有创新空间，要查新原始论文。
 
 ## 原文摘录
-
-> The most frequently addressed testing target is GUI/Event
-> — Section V-B，印刷页 51 / PDF 第 7 页；引文截到 GUI/Event，后文给出历史样本比例。
 
 > there does not exist any universally acquired tool
 > — Section VI-D-4，印刷页 60 / PDF 第 16 页；作者当时对公平评测工具的讨论，不当作 2026 现状。

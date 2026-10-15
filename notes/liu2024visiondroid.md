@@ -1,23 +1,23 @@
 # VisionDroid / Trident：用多模态模型与功能序列切分检测非崩溃功能缺陷
 
-**本文先讲清楚它怎样从“只测崩溃”走向“检测非崩溃功能与显示缺陷”，再保留 arXiv v1（VisionDroid）与 v2（Trident）两个版本的原文数字、方法变化和版本疑点。** 不认识的英文词可查 [术语表](../field.md#gui-terms)；非崩溃功能缺陷见 [functional-bug](../field.md#functional-bug)，显示缺陷见 [display-bug](../field.md#display-bug)，模型当判定器见 [llm-judge](../field.md#llm-judge)。
+**本文先讲清楚它怎样从“只测崩溃”走向“检测非崩溃功能与显示缺陷”，再保留 arXiv v1（VisionDroid）与 v2（Trident）两个版本的原文数字、方法变化和版本疑点。** 不认识的英文词可查 [术语表](../glossary.md)；非崩溃功能缺陷见 [functional-bug](../glossary.md#functional-bug)，显示缺陷见 [display-bug](../glossary.md#display-bug)，模型当判定器见 [llm-judge](../glossary.md#llm-judge)。
 
 ## 一段话介绍
 
-自动 GUI 测试长期受限于缺乏测试预言（[oracle](../field.md#oracle)）：像 [GPTDroid](liu2024gptdroid.md) 这样的工具虽然能用 LLM 生成连贯操作，但实验主要靠应用异常退出（[crash](../field.md#crash-bug)）来发现缺陷。然而大量真实错误并不会崩溃——例如记账应用里新增一笔收入后总金额没变、删除一条预算后所有历史支出全被清空，或者页面控件重叠遮挡。这篇工作（v1 名为 **VisionDroid**，v2 改题并更名为 **Trident**）将非崩溃缺陷检测建模为多模态问答：先将控件树文本与带框截图对齐辅助探索，再按“功能语义”把长测试轨迹切分成局部连贯的子序列（v1 用 Louvain 社区发现，v2 改为 Monitor 触发与功能感知思维链），交由多模态大模型（MLLM）结合检索到的历史缺陷示例判断页面状态变化是否违背处理逻辑。作者在三组非崩溃缺陷数据集（Odin/RegDroid 基线集、GitHub 真实缺陷集、人工注入缺陷集）及 Google Play 应用上评价了覆盖率、误报/漏报（Precision/Recall）与新缺陷发现能力。
+自动 GUI 测试长期受限于缺乏测试预言（[oracle](../glossary.md#oracle)）：像 [GPTDroid](liu2024gptdroid.md) 这样的工具虽然能用 LLM 生成连贯操作，但实验主要靠应用异常退出（[crash](../glossary.md#crash-bug)）来发现缺陷。然而大量真实错误并不会崩溃——例如记账应用里新增一笔收入后总金额没变、删除一条预算后所有历史支出全被清空，或者页面控件重叠遮挡。这篇工作（v1 名为 **VisionDroid**，v2 改题并更名为 **Trident**）将非崩溃缺陷检测建模为多模态问答：先将控件树文本与带框截图对齐辅助探索，再按“功能语义”把长测试轨迹切分成局部连贯的子序列（v1 用 Louvain 社区发现，v2 改为 Monitor 触发与功能感知思维链），交由多模态大模型（MLLM）结合检索到的历史缺陷示例判断页面状态变化是否违背处理逻辑。作者在三组非崩溃缺陷数据集（Odin/RegDroid 基线集、GitHub 真实缺陷集、人工注入缺陷集）及 Google Play 应用上评价了覆盖率、误报/漏报（Precision/Recall）与新缺陷发现能力。
 
 ## 关键术语与阅读前提
 
-- **[Non-crash functional bug](../field.md#functional-bug)（非崩溃功能缺陷）**：应用未发生闪退或异常终止，但界面行为或结果违背功能预期。作者将其分为单页内缺陷（**intra-page bugs**，如页面加载失败、控件遮挡重叠、内容缺失、无操作反馈，多与 [display-bug](../field.md#display-bug) 交集）与跨页缺陷（**inter-page bugs**，如增删改数据失败、媒体控制无响应、数值计算错误、设置未生效、跳转链接错误）。
-- **Text-Image Alignment（图文对齐提示）**：在截图上按控件可操作类型绘制不同颜色的边界框（[bounding box](../field.md#grounding)）与行首编号，同时提取 [view hierarchy](../field.md#view-hierarchy) 中的文本和属性；要求模型输出动作时同时给出截图编号与控件文本，不一致则触发重试反馈。
+- **[Non-crash functional bug](../glossary.md#functional-bug)（非崩溃功能缺陷）**：应用未发生闪退或异常终止，但界面行为或结果违背功能预期。作者将其分为单页内缺陷（**intra-page bugs**，如页面加载失败、控件遮挡重叠、内容缺失、无操作反馈，多与 [display-bug](../glossary.md#display-bug) 交集）与跨页缺陷（**inter-page bugs**，如增删改数据失败、媒体控制无响应、数值计算错误、设置未生效、跳转链接错误）。
+- **Text-Image Alignment（图文对齐提示）**：在截图上按控件可操作类型绘制不同颜色的边界框（[bounding box](../glossary.md#grounding)）与行首编号，同时提取 [view hierarchy](../glossary.md#view-hierarchy) 中的文本和属性；要求模型输出动作时同时给出截图编号与控件文本，不一致则触发重试反馈。
 - **Sequence Segmentation / Monitor（测试序列切分与触发）**：一次探索可能走过几十步，把全部截图一次性塞给模型既超上下文又引入噪声。v1 用图上的 **Louvain 社区发现算法**（基于相邻步功能名分词余弦相似度的模块度优化）把长轨迹切成同一业务功能的子序列；v2 改为由 **Monitor** 角色监控探索并在功能切换或关键节点触发检测 Agent。
-- **[Precision / Recall](../field.md#metrics)（精确率与召回率）**：对于非崩溃 oracle，不能只数“报了多少个 bug”（`Rep`），必须分开看：系统报告的缺陷中有多少是真缺陷（`Bug / Rep = Precision`，衡量误报控制），以及数据集中已知的真缺陷被检出了多少（`Bug / 真值总数 = Recall`，衡量漏报控制）。
+- **[Precision / Recall](../glossary.md#metrics)（精确率与召回率）**：对于非崩溃 oracle，不能只数“报了多少个 bug”（`Rep`），必须分开看：系统报告的缺陷中有多少是真缺陷（`Bug / Rep = Precision`，衡量误报控制），以及数据集中已知的真缺陷被检出了多少（`Bug / 真值总数 = Recall`，衡量漏报控制）。
 
 ## 动机
 
 依据：v1 Section I–II（第 1–3 页）；v2 Section I（第 1–2 页）。
 
-作者在引言与先导研究（Motivational Study，v1 §II）中指出：现有自动 GUI 测试缺乏通用 [oracle](../field.md#oracle)，大多只能依赖明显的异常信号测 [crash](../field.md#crash-bug)。为了说明非崩溃缺陷的普遍性与形态，作者从 Google Play 下载量超 1K、有公开 issue 且维护超 3 年的 3,128 个开源 Android 应用（共 57,326 条报告）中，随机抽样了来自 **576 个应用的 6,000 条含截图/GIF 的缺陷报告**：
+作者在引言与先导研究（Motivational Study，v1 §II）中指出：现有自动 GUI 测试缺乏通用 [oracle](../glossary.md#oracle)，大多只能依赖明显的异常信号测 [crash](../glossary.md#crash-bug)。为了说明非崩溃缺陷的普遍性与形态，作者从 Google Play 下载量超 1K、有公开 issue 且维护超 3 年的 3,128 个开源 Android 应用（共 57,326 条报告）中，随机抽样了来自 **576 个应用的 6,000 条含截图/GIF 的缺陷报告**：
 
 - 其中 **4,856 条（81%）** 为功能相关缺陷；在这 4,856 条中，**1,796 条（37%）是 crash**，而 **3,060 条（63%）是非崩溃功能缺陷**。
 - 两位有 3 年以上经验的研究者对这 3,060 条非崩溃缺陷做开放编码（分歧由第三人裁决），归纳为 **2 大类、9 小类**（v1 Figure 2，第 3 页）：
@@ -62,17 +62,17 @@ flowchart LR
 图按原文 Section III 流程绘制，用于说明模块关系。下面按模板五个问题拆解：
 
 1. **输入是什么、怎样表示？**
-   - 从 `AndroidManifest.xml` 提取应用名与全部 [Activity](../field.md#activity) 名称；
-   - 运行时通过 [UIAutomator](../field.md#execution-tools) 获取当前页面的 [view hierarchy](../field.md#view-hierarchy)（提取 `text`、`hint-text`、`resource-id`、`class`、`clickable`、`long-clickable`、`checkable`、`scroll`、`bounds` 九类属性）以及当前屏幕截图（[screenshot](../field.md#image)）。
+   - 从 `AndroidManifest.xml` 提取应用名与全部 [Activity](../glossary.md#activity) 名称；
+   - 运行时通过 [UIAutomator](../glossary.md#execution-tools) 获取当前页面的 [view hierarchy](../glossary.md#view-hierarchy)（提取 `text`、`hint-text`、`resource-id`、`class`、`clickable`、`long-clickable`、`checkable`、`scroll`、`bounds` 九类属性）以及当前屏幕截图（[screenshot](../glossary.md#image)）。
 2. **中间模块怎样处理，模型具体收到什么？**
    - 图文对齐模块在截图上用不同颜色框标出可操作控件并编号；
    - 探索历史维护 **TEXT 视图**（已测功能名及访问次数）和 **IMAGE 视图**（带操作标记与功能 ID 的最近截图）；
    - 检测阶段不把整条长轨迹直接丢给模型，而是先切分成同一业务功能的子序列（2–4 步或相邻相关功能），再检索相似 Activity 的历史 bug 样本作为 few-shot 上下文。
 3. **动作怎样选择、由谁执行、失败如何反馈？**
    - 探索器让 MLLM（`gpt-4` 视觉接口）输出操作命令（5 类动作：`click`、`input`、`long-click`、`check`、`scroll`），同时要求返回**截图上的控件编号**与**对应的控件文本**；
-   - 若编号与文本无法对齐，系统判定为模型幻觉或定位偏差，通过 `testing feedback` 提示让模型重新选择，校验通过后由 [ADB](../field.md#execution-tools) 执行。
+   - 若编号与文本无法对齐，系统判定为模型幻觉或定位偏差，通过 `testing feedback` 提示让模型重新选择，校验通过后由 [ADB](../glossary.md#execution-tools) 执行。
 4. **判定依据来自哪里、哪些观察能支持 bug 报告？**
-   - 本篇没有人工编写的软件需求规格说明书（SRS），判定依据来自 **MLLM 对页面元素视觉状态与跨页业务逻辑一致性的常识/语义推理**（即 [llm-judge](../field.md#llm-judge)），辅以检索到的真实缺陷示例；
+   - 本篇没有人工编写的软件需求规格说明书（SRS），判定依据来自 **MLLM 对页面元素视觉状态与跨页业务逻辑一致性的常识/语义推理**（即 [llm-judge](../glossary.md#llm-judge)），辅以检索到的真实缺陷示例；
    - 单页观察（如遮挡、加载白屏）在探索过程中直接询问；跨页观察通过对比子序列前后截图的界面信息变化（例如删除某项后列表数据是否异常清空、新增记录后总数是否对应变化）来报告缺陷及具体出错步骤。
 5. **何时停止，最终产物是什么？**
    - 实验固定每应用 **50 分钟**预算；产物包括探索轨迹、触发的疑似缺陷报告（含操作子序列截图、出错步编号与原因描述）。
@@ -199,7 +199,7 @@ flowchart LR
 - 论文无论 v1 还是 v2 **均未设置专门的 Threats to Validity 或 Limitations 小节**。仅在结论与讨论中提到未来需进一步提升性能，并适配更多桌面、Web 与嵌入式系统。
 
 **我们的观察：**
-1. **误报率仍然较高（Precision 0.50–0.76）且缺乏确定性验证闭环**：模型仅凭静态截图序列与常识做 [llm-judge](../field.md#llm-judge) 推理，当遇到合理的个性化设计、动态内容或单张/少量截图无法消解的视觉歧义（例如无法仅凭静态截图区分“文字被真截断”与“可滚动容器的正常边缘”）时，纯提问式 MLLM 容易产生误报。
+1. **误报率仍然较高（Precision 0.50–0.76）且缺乏确定性验证闭环**：模型仅凭静态截图序列与常识做 [llm-judge](../glossary.md#llm-judge) 推理，当遇到合理的个性化设计、动态内容或单张/少量截图无法消解的视觉歧义（例如无法仅凭静态截图区分“文字被真截断”与“可滚动容器的正常边缘”）时，纯提问式 MLLM 容易产生误报。
 2. **评测真值与粒度的边界**：Table I 中的 `Rep` 和 `Bug` 没有拆开报告单页显示缺陷（Intra-page）与跨页逻辑缺陷（Inter-page）各自的 Precision 和 Recall，读者无法从表中直接看出 MLLM 到底是在“看图找重叠”上更准，还是在“跨页算账/检查增删改”上更准。
 3. **运行环境与成本边界**：主实验仍在 Android 7.1 模拟器上完成；每步探索与每次子序列检测均需调用 GPT-4V（v2 披露每次调用约 2,000–3,000 tokens），50 分钟长跑的 API 费用与延迟开销未与传统轻量工具做成本-收益折算。
 
@@ -212,9 +212,12 @@ flowchart LR
    - VisionDroid/Trident 把截图和控件树框对齐后直接问 GPT-4V“有没有 bug”，在 Baseline 集上 Precision 只有 `0.50`，且无法通过主动微操作去验证一个疑似显示/状态异常到底是真缺陷还是正常可交互状态。
    - **待核查与推进的问题假设**：针对单页显示/UX 缺陷（如多折叠态/多设备下的文本截断、遮挡）以及局部状态歧义，能否用**“视觉候选提案 + 运行时布局树（如 ArkUI/View Hierarchy）几何不变量静态复核 + 主动可逆微操作探测与原位恢复（Active Probing & Restore）”**替代纯开环的 MLLM 猜想，从而把非崩溃检测的误报率压到接近零？同时，针对跨页功能缺陷，能否将它的“功能子序列切分”与底层数据/状态断言结合？这些是我们下一步可与合作者共同深挖的方向。
 
-## 原文摘要
+## 原文摘要关键句（节选）
 
-见 arXiv v1 与 v2 PDF 第 1 页 Abstract 原文，此处不整段复制。阅读时注意：v1 摘要末尾写的是“29 new bugs, of which 19 have been confirmed and fixed”，须结合正文 §V-C（37 个新 bug，10 修复 + 9 确认）核对。
+> “the absence of testing oracles has constrained its efficacy to identify only crash bugs”
+> — v1 Abstract，PDF p.1
+
+这句给出论文的核心问题。摘要末尾写 29 个新 bug、其中 19 个 confirmed/fixed，但正文 §V-C 写 37 个新 bug、10 个修复加 9 个确认；本笔记保留冲突，不替作者合并口径。
 
 ## 原文摘录
 

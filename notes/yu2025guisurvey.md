@@ -1,6 +1,6 @@
 # Yu 综述：移动 GUI 测试有哪些问题，视觉技术能帮在哪里
 
-**先读这一部分，再看后面的分类与证据。** 英文与缩写首次遇到可查 [术语表](../field.md#gui-terms)，概念机制见 [field](../field.md)。
+**先读这一部分，再看后面的分类与证据。** 英文与缩写首次遇到可查 [术语表](../glossary.md)，概念机制见 [field](../field.md)。
 
 ## 先用一个例子理解它为什么写这篇综述
 
@@ -219,9 +219,12 @@ GUI 测试不仅是自动点击。测试生成、已有测试的重放和迁移�
 
 “视觉”包括传统计算机视觉（CV）、OCR、深度学习等，并不等于 LLM 或多模态大模型。本文也不是 Web/桌面/移动各平台同等全面的综述；platform: multi 表示跨移动平台及迁移讨论，不能据此声称全面覆盖所有平台。
 
-## 原文摘要
+## 原文摘要关键句（节选）
 
-见 v3 PDF 第 1 页，不复制全文。
+> “This survey covers different topics of GUI testing”
+> — Abstract，v3 PDF p.1
+
+这句对应本文的定位：它不是只综述元素识别，而是覆盖生成、重放、框架、维护、报告、元素、U&A 与评价八个主题。
 
 ## 动机
 
@@ -301,9 +304,6 @@ Table 1 和 Section 2：
 
 > Our paper collection deadline is the end of September 2024.
 > — Appendix A，PDF 第 39 页，脚注 4；相应检索执行时间见第 36 页。
-
-> Oracle Generation for GUI Testing
-> — Section 6.2，PDF 第 19 页。
 
 ## 局限
 

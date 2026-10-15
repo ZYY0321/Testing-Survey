@@ -1,6 +1,6 @@
 # Trong 综述：LLM 在 GUI 测试流程里承担什么工作
 
-这篇作为流程补充，放在 [Yu](yu2025guisurvey.md) 和 [GPTDroid](liu2024gptdroid.md) 后读。它不发布新的最强测试器。术语见 [术语表](../field.md#gui-terms)，判定/维护机制见 [field](../field.md)。
+这篇作为流程补充，放在 [Yu](yu2025guisurvey.md) 和 [GPTDroid](liu2024gptdroid.md) 后读。它不发布新的最强测试器。术语见 [术语表](../glossary.md)，判定/维护机制见 [field](../field.md)。
 
 ## 先区分操作能力与测试能力
 
@@ -37,9 +37,12 @@
 
 正式发表不等于符合我们核心必读的层次要求：本篇保留为辅助材料，不将其包装成软件工程顶级综述。
 
-## 原文摘要
+## 原文摘要关键句（节选）
 
-见正式原文第 1 页或备用全文 Abstract，不复制全文。
+> “we analyze the integration of LLM agents across the entire testing lifecycle”
+> — Abstract，正式原文 p.1
+
+这句话解释了本篇的 process-centric：重点不是单独比较模型，而是追踪 LLM 在设计、脚本、执行、oracle 与维护中的作用。
 
 ## 动机与贡献
 
@@ -163,11 +166,8 @@ Discussion 的可靠性、上下文、交互和成本问题连接上述各阶段
 
 ## 原文摘录
 
-> Test oracle phase
-> — 生命周期分析，原文第 27 页。
-
-> January 2023 to July 2025
-> — Survey Methodology，原文第 8 页，声明的收集时间范围。
+> “a disconnect remains between academic prototypes and industrial requirements”
+> — Abstract，正式原文 p.1；作者随后从可靠性、成本和延迟展开这一差距。
 
 ## 局限：分别说明出处
 
