@@ -151,7 +151,7 @@ LLM GUI Agent 和 LLM GUI testing 共享“看界面—规划—操作”的外�
 
 | 方向 | 先用哪篇建立概念 | 随后应读什么具体论文 | 核心核查问题 |
 |---|---|---|---|
-| **测试生成与探索** | Kong 的技术路线 + Yu 的 GEN + Trong 的执行/脚本生成 | [GPTDroid](notes/liu2024gptdroid.md)、[GraphDroid](notes/li2026graphdroid.md)、[ProphetAgent](notes/kong2025prophetagent.md)、[ScenGen](notes/yu2026scengen.md) 及其他覆盖/成本感知方法 | 输入是截图、结构、代码还是已有文字用例？系统自由探索目标，还是把给定步骤编译为脚本？历史怎样保留？怎样避免循环并控制模型成本？覆盖或脚本完成率提高是否带来更多真实缺陷？ |
+| **测试生成与探索** | Kong 的技术路线 + Yu 的 GEN + Trong 的执行/脚本生成 | [GPTDroid](notes/liu2024gptdroid.md)、[GraphDroid](notes/li2026graphdroid.md)、[ProphetAgent](notes/kong2025prophetagent.md)、[ScenGen](notes/yu2026scengen.md)、[VLM-Fuzz](notes/demissie2026vlmfuzz.md) 及其他覆盖/成本感知方法 | 输入是截图、结构、代码还是已有文字用例？系统自由探索目标，还是把给定步骤编译为脚本？历史怎样保留？怎样避免循环并控制模型成本？覆盖或脚本完成率提高是否带来更多真实缺陷？ |
 | **非崩溃功能与显示 oracle** | Yu 的 ELE/U&A/EVA + Trong 的 Oracle | [VisionDroid/Trident](notes/liu2024visiondroid.md)、[GUIPilot](notes/liu2025guipilot.md)、[Kea](notes/xiong2024kea.md)、[PropGen](notes/xiong2026propgen.md)、[LDMDroid](notes/xiao2026ldmdroid.md) 及需求、差异、蜕变、布局几何类方法 | 预期是否独立于被测实现？误报和漏报如何计算？怎样区分合理设计与缺陷？结构化业务规则能否把判定范围缩小到相关运行状态？property 是人工编写、从运行证据生成，还是由外部需求约束？ |
 | **代码辅助 GUI testing** | Kong 的 concolic/搜索/白盒 + Yu 的 code/layout/image 维度 | [GUIFuzz++](notes/otto2025guifuzzpp.md) 及回调/路径分析、插桩覆盖反馈、代码与需求联合判定方法 | 代码信息具体改变了路径生成、状态识别还是 oracle？源码不可得时怎样退化？ |
 | **维护与回归** | Yu 的 R&R/SRP + Trong 的维护 | [ITeM](notes/cao2025item.md)、[LLMigrate](notes/beyzaei2025llmigrate.md)、[RippleGUItester](notes/su2026rippleguitester.md)、跨版本脚本修复及其他断言迁移方法 | 是修复已有脚本，还是根据代码变更新生成场景？是否保留测试意图与断言？代码 diff、历史需求和旧版本分别怎样参与路径或 oracle？动作级正确是否转化为完整脚本成功？双版本执行如何保证语义对齐？不同论文的数据集与成功标准是否可比？ |
