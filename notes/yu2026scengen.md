@@ -107,21 +107,37 @@ ScenGen 的截图候选框、OCR、页面稳定等待、动作失败修正与可
 
 ScenGen 属于**场景约束的测试生成与执行**：人提供业务目标，模型负责生成动作序列，系统保存可重放脚本；crash 日志充当缺陷 oracle。它与 GraphDroid 的全局功能探索不同，与 ProphetAgent 将详细文本步骤匹配已有转移图也不同。它最清楚地展示了 GUI Agent 和 GUI testing 的交汇：感知、规划、执行、纠错相同；测试系统额外需要可检查的轨迹和明确的失败信号。将“完成目标”当成“测试通过”仍会遗漏功能和显示错误。
 
+## 原文摘录
+
+> “ScenGen does not generate traditional assertion-based test oracles.”
+> — Section 3.5，arXiv v4 PDF 第 18 页。
+
+这句话限定了 Supervisor 的职责：它检查场景进度，不能据此把业务结果或 UX 布局判为正确。
+
 ## 原文版本与记录字段
+
+<details>
+<summary>展开书目与分类</summary>
 
 - title: Scenario-Guided LLM-based Mobile App GUI Testing
 - authors: Shengcheng Yu; Yuchen Ling; Chunrong Fang; Quan Zhou; Yi Zhao; Chunyang Chen; Shaomin Zhu; Zhenyu Chen
+- year: 2026
+- venue_type: journal
+- url: https://doi.org/10.1145/3816025
+- pdf_url: https://arxiv.org/pdf/2506.05079v4
+- institution: Technical University of Munich; Nanjing University; Tongji University
+- aka: ScenGen
 - venue: ACM TOSEM 2026；ASE 2026 Journal First 展示，**不是 ASE 主会 Research Paper**
 - DOI: https://doi.org/10.1145/3816025
 - 本次实际阅读：arXiv `2506.05079v4`，40 页，PDF 的 ACM 书目信息仍为占位符；正式 DOI 和 Journal First 状态由会议页面与作者发表列表核对。
 - code: https://github.com/iGUITest/ScenGen
 - era: llm
 - door: gui
-- question: generate, execute, evaluate
-- contribution_type: method, artifact
+- question: generate, execute, eval
+- contribution_type: method
 - platform: android
-- method: multimodal-llm, computer-vision, OCR, multi-agent, scenario-guided-exploration
-- oracle_type: crash-log, human; Supervisor 只做场景进度检查
+- method: hybrid, llm-prompt, multi-agent
+- oracle_type: crash, human; Supervisor 只做场景进度检查
 - bug_type: crash
 - benchmark: 92 apps, 10 scenarios, 99 app-scenario tasks
 - baselines: GPTDroid; ScenTest; ASOT; Monkey; Stoat; PIRLTest; Mobile-Agent-v3; AppAgent; AutoDroid（不同 RQ 使用不同集合）
@@ -129,5 +145,11 @@ ScenGen 属于**场景约束的测试生成与执行**：人提供业务目标�
 - priority: should
 - status: extracted
 - read_depth: full
+- one_liner: 用截图感知、场景决策、执行反馈和轨迹记录生成可重放 GUI 测试。
+- use_in_survey: 场景约束测试生成与 GUI Agent 的交汇；不作为非崩溃 oracle 的证据。
+- concepts: scenario coverage; visual grounding; replay; crash oracle
+- owner: Codex
+
+</details>
 
 已逐页阅读本地 40 页 PDF 的方法、实验、讨论和参考内容，并核对架构图与关键结果表；未运行工具或复现缺陷。
