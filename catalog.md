@@ -1,11 +1,14 @@
-# 论文索引
+# 具体方向论文索引
 
-只做扫视。分类和正文写在 `notes/<id>.md`。加一篇论文时，复制 `notes/_template.md`，并在下表加一行。
+本表只放提出具体方法、数据集、实证发现或评测方案的论文。综述统一放在 [field.md](field.md)。每篇论文的完整方法、实验口径、版本疑点和原文摘录见标题中的笔记链接。
 
-| id | 标题 | 年 | 场合 | 哪一问 | 笔记 |
-|---|---|---|---|---|---|
-| yu2025guisurvey | Vision-Based Mobile App GUI Testing: A Survey | 在线 2025 / 卷期 2026 | ACM Computing Surveys | generate（综述跨任务；主线入口） | [笔记](notes/yu2025guisurvey.md) |
-| liu2024gptdroid | Make LLM a Testing Expert: Bringing Human-like Interaction to Mobile GUI Testing via Functionality-aware Decisions | 2024（预印本首发 2023） | ICSE Research Track | generate（LLM 探索；crash 评测） | [笔记](notes/liu2024gptdroid.md) |
-| kong2019android | Automated Testing of Android Apps: A Systematic Literature Review | 2019 | IEEE Transactions on Reliability | generate（综述跨任务） | [笔记](notes/kong2019android.md) |
-| trong2026guilifecycle | A process-centric review of large language models in graphical user interface testing: architectures, lifecycle impact, and challenges | 2026 | PeerJ Computer Science | generate（综述跨任务） | [笔记](notes/trong2026guilifecycle.md) |
-| liu2024visiondroid | Vision-driven Automated Mobile GUI Testing via Multimodal Large Language Model (v1: VisionDroid / v2: Trident) | 2024 | arXiv preprint (cs.SE) | oracle（非崩溃功能与显示缺陷检测；兼探索） | [笔记](notes/liu2024visiondroid.md) |
+**三问**：
+
+- **测什么**：生成测试目标、动作或探索路径。
+- **怎么知道错了**：构造测试预言（oracle），判断实际结果是否违背预期。
+- **测得够不够**：用覆盖、缺陷检出、成功率等指标评价测试。
+
+|论文|年份 · 场合|第一作者单位|三问|动机|贡献|方法|实验与关键数字|作者承认的不足|还没解决的问题|和我们的关系|一段话：它怎么讲故事|
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|[**GPTDroid**：让 LLM 成为移动 GUI 测试专家](notes/liu2024gptdroid.md)|2024 · ICSE Research Track；预印本首发 2023|中国科学院软件研究所|**测什么**（探索/生成）；用覆盖和 crash 衡量是否“测得更多”|传统随机、模型与学习式探索容易覆盖不足；仅看最近几步或低层控件信息，难保持跨页面的功能目标。|作者列出四项：①把自动 GUI 测试表述为交互式问答；②提出带“功能感知记忆”的 GPTDroid；③在真实应用上做有效性与实用性评价；④用案例归纳 LLM 产生功能相关操作的原因。核心研究产物是 **方法**，未提出新 benchmark，也未提供独立的非崩溃 oracle。|读取 Manifest 与 UIAutomator 控件树，将应用、页面和控件信息转成文字 prompt；gpt-3.5-turbo 选择点击、双击、长按、滚动或输入；ADB 执行后把新页面或失败反馈送回模型。记忆模块保存已探索功能、Activity/控件访问和最近 5 步，参与下一轮决策。|效果集为 93 个应用、143 个历史 crash；每工具/应用 60 分钟、运行 3 次取最高值。Activity coverage 0.75、code coverage 0.66，最好比较配置为 0.57/0.55；触发历史 crash 95 vs 66。另在 223 个应用发现 53 个新 crash：20 修复、15 确认、18 待回应。正文“多 31%”与 95/66 的通常相对增幅不一致。|正文指出无意义文本/ID、需要外部数据或连接的流程、复杂手势仍难处理；长对话也会遗忘早期信息。|输入是结构化文本而非截图，图标、自绘区域和真实渲染问题不可见；三次取最好值不能代表一次运行稳定性；功能完成状态由模型概括，不是对业务正确性的独立证明；实验只以 crash 作为缺陷终点。|这是 LLM 驱动 GUI 探索的早期代表，适合学习“观察—决策—执行—记忆”闭环，也清楚暴露了探索器与 oracle 的区别：走得更深不等于知道结果是否正确。|作者先把覆盖不足归因于缺少 GUI 语义和全局功能进度，再把测试改写成连续问答，用功能记忆防止模型只盯当前页面。最后用覆盖、历史 crash、消融和真实新 crash 证明该探索策略在所测 Android 7.1 环境里更容易走深。|
+|[**VisionDroid / Trident**：视觉驱动的非崩溃功能缺陷检测](notes/liu2024visiondroid.md)|2024 · arXiv v1/v2；截至笔记核对时未确认正式录用|中国科学院软件研究所|**怎么知道错了**（非崩溃 oracle）；兼顾探索|已有自动 GUI 测试常依赖 crash 信号，无法发现“程序没崩但结果错了”的单页显示和跨页业务逻辑缺陷；长探索轨迹又会给多模态模型带来噪声。|① 对 3,060 个非崩溃功能缺陷做 2 大类、9 小类实证分类；② 提出结合图文对齐、功能感知探索、轨迹切分和示例检索的检测框架；③ 在已知、注入和真实应用缺陷上评价 Precision/Recall，并在 v2 扩展 iOS/HarmonyOS 小规模验证。|将控件树与带框截图对齐，MLLM 选择动作并由 ADB 执行；记录每步截图与推断功能。v1 用 Louvain 将长轨迹切成语义相关子序列，v2 改为 Monitor 触发检测并让 Detector 先推断预期功能结果，再判断实际页面变化；检索历史缺陷示例辅助判定。|v1 三组数据集的 Precision 为 0.50/0.72/0.76，Recall 为 0.42/0.51/0.64；消融显示随机切分或随机示例会大幅降低判定效果。v1 真实应用正文报告提交 37 个新缺陷，10 修复、9 确认；摘要写 29，存在版本内冲突。v2 扩充到 590 个已知缺陷，并报告 43 个新缺陷、31 修复、12 确认。|论文未设独立 Limitations/Threats 小节；讨论仅提出继续提升性能并扩展到更多平台。|Precision 0.50–0.76，误报仍明显；模型依据截图序列和示例推断预期，没有外部需求保证；v1/v2 多处数字不一致；复杂手势、动态内容、现代系统和调用成本的证据仍有限。|它把主线从“LLM 帮忙探索并等 crash”推进到“MLLM 解释操作前后状态并报告非崩溃错误”，是研究 GUI oracle 的关键具体工作，也证明通用 GUI Agent 的任务完成能力不能替代缺陷判定。|作者先用真实 issue 说明多数功能缺陷不会 crash，再让一个模型负责看图探索、一个机制负责按功能切分轨迹、一个模型负责先想预期再判实际。实验的重点从覆盖率转向 Precision/Recall，同时也暴露纯模型判定仍有较高误报。|
