@@ -3,6 +3,7 @@
 当前以 **GUI testing** 为调研中心：先梳理传统方法与 LLM/多模态模型辅助测试，再选择一个问题深入。静态分析、单元/API 测试等按它们与 GUI 测试的具体关联选择性纳入。
 
 论文见 [索引](catalog.md)，领域概念与术语见 [field.md](field.md)。笔记注明所读版本与核对范围，未经交叉复核的初稿不标为 `checked`。
+大表的写法示例和填写要求见 [examples/](examples/README.md)。
 
 用 Markdown。CSV 装不下摘录，二十六列的表在 GitHub 上也没法读。
 
