@@ -433,6 +433,75 @@ ESM（Event Sequence Model）表示 GUI 可能的事件序列；Delta ESM 表示
 
 Abstraction 是提取较高层的测试意图，concretization 是在目标界面找可执行实现。源版本一键删除，目标版本需菜单加确认；具体操作变了，高层“删除 A 并检查不恢复”应保持。对应：Yu §4.1；Trong 维护阶段。这是不同机制的作用解释，不说 ESM 与语义抽象就是同一种模型。
 
+<a id="functional-flow-graph"></a>
+
+## 功能流图（Functional Flow Graph, FFG）
+
+把用户功能及其状态依赖表示为有向图。FuncDroid的节点记录目标、有关变量和操作轨迹，边记录前后轨迹及启用条件；不是仅记录页面是否能跳转。例如先从血糖页添加提醒，再从管理页删除，会影响是否能再次添加同一时间提醒。图来自运行观察和模型推理，条件本身仍需验证。来源：[FuncDroid](notes/he2026funcdroid.md)，Sec.3.1–3.2，PDF第5–13页。
+
+<a id="chromaeyes-visual-oracle"></a>
+
+## 明暗模式一致性 / 边缘复核 / IoU
+
+明暗模式一致性要求主题转换后元素保持可见和可辨认，不能要求像素相同。IoU是两个检测框交集与并集面积之比，ChromaEyes以0.5判断对应位置；某边只有一边检测到对象时，再比较同区域边缘，以排除检测器漏检。自编GUI例子：深色模式的保存图标未被对象检测器找到，但截图中轮廓与亮色模式相同，此时不立即把漏检当缺陷。若两模式都有同样的截断，此规则也未必发现。出处：[ChromaEyes笔记](notes/shweta2026chromaeyes.md)，§3.3–3.4、§4.4，PDF第10–14页。
+
+<a id="symbolic-gui-oracle"></a>
+
+## GUI symbolization / schema / DSL：界面符号化、数据结构与断言语言
+
+符号化把截图或界面树中的业务对象变成可引用的数据，例如商品有标题、价格和数量，购物车有商品列表。schema 规定字段与类型；DSL 提供访问当前/历史状态、抽取数据、比较关系的接口。完整 GUI 例子：保存加入商品前后的购物车，抽取新商品，再检查旧商品仍在、数量与价格一致、小计等于旧小计加新商品金额。这样判定可由程序比较，而不只依靠模型看图回答“正确”。不过抽取的数据及断言仍可能由模型生成错误，结构化不等于独立真值。来源：[WebTestPilot](notes/teoh2026webtestpilot.md) §2–4，PDF pp.5–11，尤其 Figures 3–6 和 Table 1。
+
+
+<a id="page-reidentification"></a>
+
+## Page reidentification：跨时间识别同一逻辑页面
+
+页面内容改变后，仍可能属于同一页面类型。WebTestPilot 先按 DOM 树编辑距离选择历史候选，再让模型比较截图，判断是否沿用相同 page_id。例子：空购物车和加入相机后的购物车应关联，才能验证增加的商品与金额；仅将两张图视作不同状态会丢掉这种比较。它有助于检索历史，不证明两状态所有业务含义一致，也不保证后续断言正确。来源：[WebTestPilot](notes/teoh2026webtestpilot.md) §4.3.2，PDF p.11。
+
+
+<a id="property-based-gui"></a>
+
+## Property-based testing / executable property：基于属性的GUI测试与可执行属性
+
+先指定对一类情况都应成立的功能规则，再让测试框架生成不同操作序列寻找违反规则的状态。Android可执行属性可表示为前置条件P、交互I、后置条件Q：例如文件列表存在时，选择一个文件夹并点击，随后路径应包含该目录名。它不同于只写固定一次输入输出；属性也可以包含局部操作，框架负责反复创造可检查的状态。iPBT将人写的结构化规则编译成Kea代码，不负责自动发现所有规则，也不改变Kea的输入生成。来源：[iPBT](notes/xiong2026ipbt.md) §1–3，PDF pp.1–8；具体原例Figure1，pp.1–2。
+
+
+<a id="enriched-widget-context"></a>
+
+## Enriched widget context：增强控件上下文
+
+将控件原始标识与模型推断的语义放在一起，帮助把测试描述落到具体控件。iPBT输入页面截图、应用和Activity名、控件局部图与text/resource_id/content_description/class，生成semantic label和functionality。例子：AnkiDroid预览页里resource_id为qa的Test文本被标注为“问题文本显示区”，属性中的“问题”因而能够映射到qa；但“选中的卡片”和“正在浏览的卡片”仍可能被混淆。语义注释是模型推断，不是开发者保证的真值。来源：[iPBT](notes/xiong2026ipbt.md) §3.1，PDF pp.4–6；失败例p.10。
+
+
+<a id="deep-q-network"></a>
+
+
+## 深度Q网络（Deep Q-Network, DQN）
+
+用神经网络估计某个状态下做一个动作的未来累计奖励，而不是为所有状态动作组合维护一张不断增大的表。在GUI测试中，奖励可来自新状态或不同动作，不自动表示界面行为正确。WebCQ把页面结构向量与当前候选动作特征拼接，逐个估值，适配每页按钮数不同的情形。来源：[WebCQ](notes/fan2026webcq.md)，Sec.2.1/4.2，PDF第2、4–5页。
+
+<a id="ctde"></a>
+
+
+## 集中训练、分散执行（Centralized Training and Decentralized Execution, CTDE）
+
+多个执行器训练时分享观察、动作和奖励，由集中模块协调学习；执行时各自根据当前看到的页面选择动作。例如几个浏览器测试同一网站，可以共同积累经验，再分别决定点击什么。WebCQ使用QTRAN使局部动作价值与联合价值学习相容，并在各浏览器至少产生新转换后训练；训练期间仍有等待。它不是用多个用户角色共同完成一个业务事务。来源：[WebCQ](notes/fan2026webcq.md)，Sec.2.2–4.3，PDF第3–6页。
+
+<a id="failure-log-deduplication"></a>
+
+
+## 失败日志规范化与去重
+
+先把错误日志中的易变内容（如数字）统一，再对相同文本合并计数，以减少同一种现象的重复统计。WebCQ只保留浏览器SEVERE日志，再规范化去重；这得到的是不同日志数量，不是开发者确认的独立缺陷数量。同一根因可能产生不同日志，不同根因也可能被规范化合并。来源：[WebCQ](notes/fan2026webcq.md)，Sec.6.1.1，PDF第7页。
+
+<a id="mbt-industrial"></a>
+
+## MBT / IFML / 混合方法研究：显式行为建模与工业评价
+
+模型驱动测试（MBT）的model可指人工维护的页面、控件、动作和条件图，不是大语言模型。IFML是交互流建模语言，Cao等扩展为电视GUI的T-IFML，表达遥控焦点和控件激活条件。原文例子是邮箱未填时密码框不可用，生成器应过滤直接操作密码框的不可行路径。执行路径覆盖模型不意味着模型已涵盖应用全部需求。
+
+混合方法研究同时用覆盖率、工时等定量数据和问卷访谈理解采用体验；Likert为按同意程度评分的有序量表。问卷评分显示更认可维护性不能证明工具找出更多缺陷。Cao等的短期/持续参与者是两组事后评价，不是同一人完整前后随访。出处：[工业MBT笔记](notes/cao2025mbtindustrial.md)，§2.2、§3–4，PDF第5–16页（含机构封面，较印刷页多1）。
+
 ## 维护原则
 
 术语首次出现在笔记的阅读正文时，写中文含义并链接相关解释。只列工具名字、只展开英文全称，都不够；要说明这个词在 GUI 测试里具体承担什么作用。论文特有缩写按该论文展开，不借别的领域补猜。

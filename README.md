@@ -57,6 +57,8 @@
 | read_depth | `unread` `abstract` `full` |
 | status | `reading` `extracted` `checked` |
 
+字段不适用、证据不足或现有枚举无法准确表达时可以留空，并在笔记中说明实际情况；不要把浏览器严重日志强行标成 crash，也不要把单一电视平台标成多平台。
+
 `question` 第一项是主任务。使用了 benchmark 不等于贡献了 benchmark；有代码不自动等于贡献了 harness；做了常规对比实验不自动等于 `empirical`。修测试脚本归 `maintain`，修被测程序归 `repair`。
 
 ## 新增论文
