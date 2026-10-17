@@ -580,6 +580,24 @@ Abstraction 是提取较高层的测试意图，concretization 是在目标界�
 
 Reca11把参考问题集内条目标为confirmed；参考集外但录像中用户确实提过的问题为mentioned；无相应反馈为non-issue。前两类都算抽取TP，用户提过而模型漏掉为FN，故其recall是用户反馈抽取率，不是应用全部注入错误的检出率。自编GUI例子：用户抱怨按钮名字难懂可算mentioned，但尚不能据此说维护者已确认代码故障。反之，真实截断若无人说出且转写没体现，工具也无从抽取。出处：[Reca11笔记](notes/huq2025reca11.md)，§III.D/IV.B，PDF第6、9页；原文表VI计数另有不一致，不能直接复算所有聚合。
 
+<a id="bug-testing-cognitive-map"></a>
+
+## bug测试认知图（testing cognitive map）
+
+将相似应用历史bug报告挂到当前应用的Activity跳转图，表示到达某组件后应尝试的风险操作。BugHunter用LLM按功能映射两应用节点，例如AddTransaction和AddExpense；完成一份报告后优先测同页剩余报告，再转相邻页。这是生成目标与路线的地图，不保证历史错误在当前应用也存在。出处：[BugHunter](notes/chen2025bughunter.md)，Sec.2.2–2.3，PDF第8–11页。
+
+<a id="xr-grounding"></a>
+
+## XR / IGE / GUI grounding：三维场景的可交互对象与二维定位
+
+XR包括VR/AR/MR；Orienter实际数据来自Steam VR-Only应用。IGE是可交互界面元素，可以是球、杯子、树而非标准按钮。GUI grounding将语言所指对象定位到屏幕；Orienter用单眼二维截图输出框，不恢复深度或抓取轨迹。原文例子：树在种植游戏可拾取，在钓鱼游戏可能只是背景，因此交互性需结合玩法语境。出处：[Orienter笔记](notes/li2026xrgrounding.md)，所读arXiv v4 §1/§3.1/§3.5，PDF第3、5–6、10页；正式FSE2026题名不同，正式全文未校对。
+
+<a id="xr-simulated-coverage"></a>
+
+## 动作空间约束 / 模拟IGE覆盖：命中框不等于真实动作成功
+
+Orienter下游把预采截图作为固定场景，逐步生成二维点；点在人工可交互框内算有效，某框至少一次被点中算覆盖。预测框限制动作候选可减少无效背景采样，但没有实际点击/抓取、状态变化或缺陷预言。自编例子：点命中球框，仍可能因球在远处或控制器操作不对而无法抓取，不能据命中算实际交互成功。论文60分钟是模拟采样进度，不是设备在线执行耗时保证。出处：[Orienter笔记](notes/li2026xrgrounding.md)，所读v4 §5.3.4/§5.4/§6.3，PDF第13–14、18页。
+
 ## 维护原则
 
 术语首次出现在笔记的阅读正文时，写中文含义并链接相关解释。只列工具名字、只展开英文全称，都不够；要说明这个词在 GUI 测试里具体承担什么作用。论文特有缩写按该论文展开，不借别的领域补猜。
