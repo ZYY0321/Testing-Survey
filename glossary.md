@@ -738,6 +738,74 @@ PerFrame正常路径将录像末帧当完成页面参照；若模型预先判断
 
 自编教学例：30秒录像结束仍转圈，最多可说截至30秒尚未完成，不能报告30秒成功加载。出处：[PerFrame笔记](notes/liu2026perframe.md)，Sec.3.6.3、Table2–3，第7、9页。
 
+<a id="guitester-attribution"></a>
+
+## GUITester testing intent / anomaly attribution：任务内主动检查与异常归因
+
+Planner在导航中插入替代路径、边界输入、状态验证；Monitor先判断操作后是否异常，Reflector再读标注实际点击点的轨迹，区分点错等agent错误与产品失效。目的在于避免agent为了完成任务绕开坏控件，或把产品问题都归为自身执行偏差。其UX指交互流程问题，作者明确未覆盖重叠、错位、截断。出处：[GUITester笔记](notes/gao2026guitester.md)，Sec.4/7、Appendix B，PDF第4–6、9、11–12页。
+
+<a id="reflow-active-verification"></a>
+
+## Responsive reflow / viewport / active verification：响应式重排、视口与主动复核
+
+响应式重排是页面随可用宽度变化重新布局；视口是浏览器当前可显示页面的区域，CSS像素是布局单位而非硬件像素。窄屏把导航收进菜单或把内容移到屏外，未必是缺陷。ReFLAIR先以宽屏信息/功能为参照，给未匹配控件生成缺失候选，再滚动或展开菜单寻找并重新核对。主动操作可撤销误报，但有预算的搜索失败不等于形式化证明不可达；自动轮播、吸附和等待时间还会影响观测。
+
+出处：[ReFLAIR](notes/he2026reflair.md)，§2–3，第3–8页；局限第13–19页。
+
+<a id="timestump-focus-live-region"></a>
+
+## TalkBack focus / liveRegion：读屏焦点与动态播报
+
+TalkBack是Android屏幕阅读器，逐项移动焦点并朗读当前元素；向左/右滑切换焦点，双击激活，不必然是滚动页面。liveRegion是开发者配置的动态播报属性。新入口若出现在当前焦点之前且没有播报，用户可能不知道；但动态区域缺属性不自动证明一切场景都不可用，仍需交互上下文与影响验证。
+
+出处：[TIMESTUMP](notes/mehralian2025timestump.md)，§II–IV，第2–7页。
+
+<a id="timestump-snapshot-replay"></a>
+
+## VM snapshot / action-level replay：虚拟机快照与动作级重放
+
+虚拟机快照保存可恢复的系统运行状态，不是页面截图。TIMESTUMP先探索并保存不同状态，再恢复状态分别执行交互，减少前一动作改变环境对下一动作测试的干扰。应用后端等外部状态不等同已由设备快照全部回滚；论文未保证所有外部副作用恢复。
+
+出处：[TIMESTUMP](notes/mehralian2025timestump.md)，§IV.A–B，第5–6页。
+
+<a id="timestump-dynamic-oracle"></a>
+
+## Dynamic-content oracle：动态内容的交互时序判定
+
+TIMESTUMP用动作前中后的控件树、事件、焦点与播报属性检测出现、消失、短暂存在、移动、属性修改五类读屏障碍。判定对象是变化是否可能使用户不知情或来不及操作，不是有变化即bug。单动作异常也可能在回退后恢复，需与实际用户任务失败区分。
+
+出处：[TIMESTUMP](notes/mehralian2025timestump.md)，§IV.C、V.B，第6–10页。
+
+<a id="a11yscan-scenario"></a>
+
+## A11yScan UI scenario：界面状态与跨操作间接变化
+
+A11yScan的scenario指具有具体控件和属性的界面状态。Activity-dependent是同一Activity内打开菜单、填表等直接变化；Activity-sensitive是其他操作积累后间接改变当前界面的状态，例如在分类页新增分类再返回主页。它不同于ScenGen的高层业务场景。探索先组合空/非空、选中/未选中等状态，再重访转换图中出度至少二的关键节点，捕捉间接变化。Activity覆盖不能代替这些状态的检查覆盖。出处：[A11yScan笔记](notes/zhang2025a11yscan.md)，Sec.II-A/III-A，PDF第3–5页。
+
+<a id="cross-browser-inconsistency"></a>
+
+## Cross-browser inconsistency（XBI）：跨浏览器显示不一致
+
+同一网站在两个浏览器中出现布局、颜色、文字或元素有无差异。它是差分测试的候选信号，不保证某个浏览器有根因错误；广告、轮播、访问阻挡与采集时机也会制造差异。XBIDetective先识别正常变化再比较剩余显示，但忽略动态区域又会漏掉其中真实问题。
+
+出处：[XBIDetective笔记](notes/grewal2026xbidetective.md)，Sec.4、7–8，第4–5、9–10页。
+
+<a id="setting-related-ui-display"></a>
+
+## Setting-Related UI Display（SUD）：设置相关显示问题
+
+字体大小、语言、主题或屏幕方向改变后，应用未正确适配产生的显示问题。SUDFinder区分颜色/对齐/间距/包含关系的样式异常，以及可见性、数据、翻译的语义异常；实现主要处理样式类。设置前后应保持的是有前提的关系，不是整张图像不变。
+
+出处：[SUDFinder笔记](notes/huang2026sudfinder.md)，Sec.III–IV，第5–10页。
+
+<a id="test-activity-layout-injection"></a>
+
+## Test-Activity injection：注入测试页面直接渲染布局
+
+SUDFinder给Android应用加入专用Activity，直接加载XML布局，绕过正常业务中的登录、深层导航或错误条件，以扩大特定显示问题的观察范围。模型补充XML缺失文本，必要时滚动收集新增组件。这不是学到更好点击路径；注入也不能保留原页面所有动态代码，候选需在真实应用复现。
+
+出处：[SUDFinder笔记](notes/huang2026sudfinder.md)，Sec.IV-B、V，第8–12页。
+
 ## 维护原则
 
 术语首次出现在笔记的阅读正文时，写中文含义并链接相关解释。只列工具名字、只展开英文全称，都不够；要说明这个词在 GUI 测试里具体承担什么作用。论文特有缩写按该论文展开，不借别的领域补猜。

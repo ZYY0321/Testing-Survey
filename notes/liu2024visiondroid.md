@@ -1,5 +1,11 @@
 # VisionDroid / Trident：用多模态模型与功能序列切分检测非崩溃功能缺陷
 
+## 2026-10-18：正式发表身份补核
+
+本工作已正式发表于 **IEEE TSE 2025，51(12):3452–3466，DOI [10.1109/TSE.2025.3614469](https://doi.org/10.1109/TSE.2025.3614469)**，并在 [ICSE 2026 Journal-first](https://conf.researchr.org/details/icse-2026/icse-2026-journal-first-papers/26/Seeing-is-Believing-Vision-driven-Non-crash-Functional-Bug-Detection-for-Mobile-Apps) 展示。官方会议页注明2025-09-26发表，Crossref登记卷期为2025年12月；不是ICSE2026 Research新论文。此前未确认正式身份的描述已更正。
+
+**全文证据边界仍保留**：以下方法和数字来自已读arXiv v1/v2，尚未逐字对照15页正式出版稿；正式摘要使用VisionDroid名称、590已知缺陷、43新缺陷/31修复，与v2多项数据相近，但不能因此宣称二者全文相同。文件名中的2024保留作历史索引，不代表当前正式出版年份。
+
 **本文先讲清楚它怎样从“只测崩溃”走向“检测非崩溃功能与显示缺陷”，再保留 arXiv v1（VisionDroid）与 v2（Trident）两个版本的原文数字、方法变化和版本疑点。** 不认识的英文词可查 [术语表](../glossary.md)；非崩溃功能缺陷见 [functional-bug](../glossary.md#functional-bug)，显示缺陷见 [display-bug](../glossary.md#display-bug)，模型当判定器见 [llm-judge](../glossary.md#llm-judge)。
 
 ## 一段话介绍
@@ -243,7 +249,7 @@ VisionDroid/Trident 直接研究单页显示缺陷，因此与 UX-Agent 的目�
 - **2026-10-15**：完整读取并对照了同一 arXiv 编号下的两个版本全文：
   1. **arXiv v1（`2407.03037v1`，2024-07-03，共 12 页）**：标题为 *Vision-driven Automated Mobile GUI Testing via Multimodal Large Language Model*，系统名为 **VisionDroid**。核对了 Sections I–VII 全部正文、Figures 1–9 与 Tables I–III。
   2. **arXiv v2（`2407.03037v2`，2024-12-04，共 12 页）**：标题改为 *Seeing is Believing: Vision-driven Non-crash Functional Bug Detection for Mobile Apps*，系统更名为 **Trident**，新增作者 Mengzhuo Chen，新增 AppAgent 基线与 iOS/HarmonyOS 跨平台实验（Table IV）。
-- 两个版本截至核对日均未标注正式会议或期刊发表信息（v2 页眉仍为 IEEEtran 默认模板占位符 `JOURNAL OF LATEX CLASS FILES`）。未在本地运行其开源仓库代码或独立复现全部 105/187 个真实应用实验。
+- 所读两个arXiv副本未标注正式期刊书目，不能据模板占位符推断作品未发表。2026-10-18已通过ICSE2026 Journal-first官方页与Crossref核实TSE2025正式身份；正式15页全文尚未逐字对照。未运行代码或独立复现全部105/187个应用实验。
 
 ## 书目与分类（记录用）
 
@@ -252,11 +258,11 @@ VisionDroid/Trident 直接研究单页显示缺陷，因此与 UX-Agent 的目�
 
 - title: Vision-driven Automated Mobile GUI Testing via Multimodal Large Language Model (v1) / Seeing is Believing: Vision-driven Non-crash Functional Bug Detection for Mobile Apps (v2)
 - authors: Zhe Liu; Cheng Li; Chunyang Chen; Junjie Wang; Boyu Wu; Yawen Wang; Jun Hu; Qing Wang (v2 新增 Mengzhuo Chen)
-- year: 2024
+- year: 2025
 - era: llm
-- venue: arXiv preprint (cs.SE)
-- venue_type: preprint
-- url: https://arxiv.org/abs/2407.03037
+- venue: IEEE Transactions on Software Engineering 51(12), 3452–3466 (2025); ICSE 2026 Journal-first presentation
+- venue_type: journal
+- url: https://doi.org/10.1109/TSE.2025.3614469
 - pdf_url: https://arxiv.org/pdf/2407.03037v1
 - version: 同时核对 arXiv v1（2024-07-03，VisionDroid）与 arXiv v2（2024-12-04，改题并更名为 Trident，https://arxiv.org/pdf/2407.03037v2）；笔记以 v1 结构为主线并逐项注明 v2 的方法与数据扩展
 - code_url: https://github.com/testtestA6/VisionDroid (v1) / https://github.com/testtest2024-art/Trident (v2)
