@@ -17,11 +17,16 @@
 | 阅读主题 | 论文与发表场合 | 主要值得比较的机制 | 任务边界 |
 |---|---|---|---|
 | 候选异常驱动的主动复核 | [ReFLAIR](notes/he2026reflair.md)，FSE2026 Research | 宽窄布局对应；对疑似缺失项滚动、展开菜单后重判 | 响应式Web信息/点击功能丢失，依赖DOM，不是所有原生端视觉缺陷 |
-| 设置变化引发的显示问题 | [SUDFinder](notes/huang2026sudfinder.md)，TSE2026 | 系统设置变化、页面触达与显示异常判定结合 | 重点是设置相关显示缺陷，所读作者版与正式身份分开记录 |
+| 设置变化引发的显示问题 | [SUDFinder](notes/huang2026sudfinder.md)，TSE2026 | 系统设置变化、测试布局强制渲染与显示异常判定结合 | 强制渲染不等于真实导航可达；所读作者版与正式身份分开记录 |
 | 测试目标感知的状态探索 | [A11yScan](notes/zhang2025a11yscan.md)，ICSE2025 Research | 控件状态组合、关键页重访，再用上下文复核规则警告 | 非LLM可访问性方法；不是按视觉异常概率自适应搜索 |
 | 定向任务中的主动检查 | [GUITester](notes/gao2026guitester.md)，Findings ACL2026 | 任务中插入边界/替代路径/状态检查，分离异常发现与归因 | Findings而非ACL主会；UX指交互流程，尚未覆盖布局重叠和截断 |
 | 跨浏览器视觉差异的语义筛查 | [XBIDetective](notes/grewal2026xbidetective.md)，ICSE2026 SEIP | 对跨浏览器截图差异作视觉语义判断 | 工业实践论文；不是全站探索器，不与单屏显示基准直接排名 |
 | 动态内容的过程型oracle | [TIMESTUMP](notes/mehralian2025timestump.md)，ICSE2025 Research | 动作前中后控件、事件和焦点判断读屏障碍 | 不读取像素判断遮挡，不是视觉布局检测器或风险搜索器 |
+| 点击区域的主动验证 | [TouchAlign](notes/qiu2026touchalign.md)，FSE2026 **Industry** | 实际点按探测可见框与交互框的错位，静态/动态反馈分流 | 页面入口和重放路径已给定；中心点击正确是前提，不是自主全局探索 |
+| 规范与语义证据驱动oracle | [GenA11y](notes/he2025gena11y.md)，FSE2025 Research | 按37项规范分别提取DOM、计算后样式和必要图像 | 运行时截图/缩放不等于动态状态探索，总分不能代表截断子类效果 |
+| 辅助技术的真实导航检查 | [A11yNavigator](notes/jain2025a11ynavigator.md)，ASE2025 Research | 比较DOM交互目标与真实NVDA可到达/可激活结果 | 不是自然语言页面导航或视觉布局检测；完整执行成本较高 |
+| 误操作风险的控件探索 | [EP-Detector](notes/guo2025epdetector.md)，ICSE2025 Research | 围绕易误操作控件进行导航、事件模拟与异常判定 | 需区分误操作风险、已触发后果和自然语言任务导航，具体定义见笔记 |
+| 颜色修复与效果验证（相邻工作） | [DroidPalette](notes/gu2025droidpalette.md)，ASE2025 Research | 同页选色、XML属性试验、修后规则复检与用户/维护者评价 | 主任务是repair，不作探索主线；规则通过不等于完整UX正确 |
 
 相关已读参照：[UI-Lens](notes/xiang2026uilens.md)提供单屏/跨屏显示评价，[ChromaEyes](notes/shweta2026chromaeyes.md)利用明暗模式关系，[VisionDroid](notes/liu2024visiondroid.md)结合探索和非崩溃语义判定，[KuiTest](notes/hu2025kuitest.md)比较控件预期与单步响应。VisionDroid已补核TSE2025正式发表与ICSE2026 Journal-first身份，全文证据仍注明所读arXiv版本。
 
@@ -40,12 +45,10 @@
 
 | 候选 | 已核实的场合与主题线索 | 当前状态 |
 |---|---|---|
-| [TouchAlign](https://conf.researchr.org/details/fse-2026/fse-2026-industry-papers/56/What-You-See-Is-Not-What-You-Tap-Detecting-Misalignments-between-Visual-and-Interact) | FSE2026 **Industry Papers**；比较视觉边界与实际点击响应边界 | 研究主题直接相关，尚未取得全文 |
 | [Minuku](https://conf.researchr.org/details/ase-2025/ase-2025-industry-showcase/15/Minuku-Detecting-Diverse-Display-Issues-in-Mobile-Apps-with-Small-scale-Dataset) | ASE2025 **Industry Showcase**；微调视觉语言模型检测遮挡、缺失、溢出 | 尚未取得全文，不能当Research Track论文 |
-| [GenA11y](https://doi.org/10.1145/3729371) | FSE2025 Research；语义可访问性判定，也是ReFLAIR的对照 | [作者PDF](https://seal.ics.uci.edu/publications/2025_FSE_GenA11y.pdf)已取得，待全文记录 |
-| [A11yNavigator](https://doi.org/10.1109/ASE63991.2025.00159) | ASE2025 Research；屏幕阅读器的网页导航障碍 | [作者PDF](https://ics.uci.edu/~seal/publications/2025_ASE.pdf)已取得，待全文记录；不混用同名学位论文 |
 | [AccessDroid](https://doi.org/10.1145/3797108) | FSE2026 Research；运行时语义树的读屏障碍 | 研究长文未取得，不用同工具5页演示稿替代 |
-| [DroidPalette](https://doi.org/10.1109/ASE63991.2025.00169) | ASE2025 Research；颜色可访问性刻画与修复，主要任务为repair | [作者PDF](https://huaxunhuang.github.io/src/ase25.pdf)已取得，待全文记录与版本差异核对；暂非探索主线 |
+| [HTML5 canvas视觉oracle](https://link.springer.com/article/10.1007/s10664-026-10906-3) | EMSE，2026-07-16在线发表、2027卷期；绘图内容不在普通DOM中 | 已取得2025预印本，尚未全文整理或与新增作者/实验的期刊扩展稿核对，不把它简称为2025正式论文 |
+| [GUITestScape](https://arxiv.org/abs/2605.29532) | 2026预印本；探索测试与显示/交互缺陷过程评价 | 已取得PDF，待全文记录；尚未确认正式录用，不作为已核实权威发表工作 |
 
 ## 记录规则
 

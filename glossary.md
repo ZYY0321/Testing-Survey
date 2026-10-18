@@ -806,6 +806,42 @@ SUDFinder给Android应用加入专用Activity，直接加载XML布局，绕过�
 
 出处：[SUDFinder笔记](notes/huang2026sudfinder.md)，Sec.IV-B、V，第8–12页。
 
+<a id="droidpalette-color-repair"></a>
+
+## Color contrast / repair validation：颜色对比与修复后验证
+
+颜色对比关注前景文字或图形与背景的可辨认程度，不等于简单RGB差。DroidPalette把选色、能否找到生效XML属性、修后检查器是否通过、用户偏好及维护者接受分开评价。颜色阶段100%不表示自动完整修复100%；同一检查器不再报警也不保证主题切换、动态配色与全部业务正确。它主要修产品配置，不是修测试脚本，也不是用滑动复核遮挡。
+
+出处：[DroidPalette笔记](notes/gu2025droidpalette.md)，§V–VII，第5–11页。
+
+<a id="wcag-evidence-analyzer"></a>
+
+## WCAG success criterion / evidence-specific analyzer：成功准则与针对性证据分析器
+
+WCAG把网页可访问性目标落实到成功准则（SC）。检查器既要知道准则要求什么，也要收集能够支持该判断的证据：图片描述要对照实际图像，链接含义可能需要祖先和相邻内容，文字对比度需要浏览器计算后的前景/背景色和字体大小。DOM是元素及其关系；计算后样式由浏览器合并CSS和脚本影响后获得；ARIA及可访问名称帮助辅助技术理解控件，均不同于单独一张截图。GenA11y为37项准则分别组织提取器与模型提示，但这不等于37个自主探索agent，也不证明37项都被完整、均衡地评价。其静态类别允许浏览器渲染、截图及规定变换，但不进行完整动态键盘/鼠标状态探索。
+
+出处：[GenA11y](notes/he2025gena11y.md)，§3–4，第4–10页；动态边界与评价见§5。
+
+<a id="a11ynavigator-navigation"></a>
+
+## A11yNavigator locatability / actionability：读屏可到达与可激活
+
+可到达性指用某种读屏导航能否找到预期交互控件；可激活性指找到或直接聚焦后发送Enter/Space能否引起相应无障碍状态变化。Tab通常移动DOM焦点，按类型快捷键跳转特定控件，向下箭头移动NVDA虚拟光标而不一定改变DOM焦点，因此最后一种要从播报逆向匹配DOM。A11yNavigator用提取的可点击清单与实际访问集合比较，另独立聚焦目标检查激活；它没有先用鼠标建立业务正确结果。某快捷键不可达不等于所有方式都不可达，按键成功也不等于业务正确。出处：[A11yNavigator笔记](notes/jain2025a11ynavigator.md)，Sec.III-A/B，作者公开13页PDF第4—6页。
+
+<a id="visual-interactive-misalignment"></a>
+
+## Visual-interactive misalignment / hit area：视觉与交互边界错位、触摸生效区域
+
+视觉边界是截图中控件可见的范围，交互边界是实际点按后触发该控件功能的范围。两者可能因父容器接收事件、触摸代理或覆盖层而不同。TouchAlign以中心点击效果为参照，向四方向二分探测哪些位置产生等价效果，重建交互范围；静态画面用SSIM，动态画面用多模态模型比较。最后用两框IoU筛查缩小、膨胀或偏移的错位。它是主动操作获得隐藏状态的UX判定，不是单屏视觉重叠检测；中心点失效、不规则区域和合理扩大触摸目标都会影响解释。
+
+出处：[TouchAlign](notes/qiu2026touchalign.md)，§2–3，第3–6页；实验与限制§4–5，第6–10页。
+
+<a id="error-prone-operation-anomaly"></a>
+
+## EPA / bEPA / aEPA / eEPA：易误操作异常与目标控件恢复
+
+EP-Detector将易误操作异常分为三类：bEPA比较相近手势是否产生不同且非原始状态的结果；aEPA在控件安全区域改变落点，检查同类操作是否产生不同结果；eEPA模拟卡顿中的重复点击，观察资源负担或新页同坐标被误触。它们是UX风险判定，不把所有手势差异直接认作产品错误。导航使用BFS、页面属性相似度和轨迹重放恢复待测控件，而不是理解自然语言任务或按UX风险排序全局页面。安全区图示半径24dp，正文援引48×48dp目标建议但换算未充分展开；不能将安全区直接当作实测点击框。出处：[EP-Detector笔记](notes/guo2025epdetector.md)，Sec.IV，作者公开PDF第3—7页。
+
 ## 维护原则
 
 术语首次出现在笔记的阅读正文时，写中文含义并链接相关解释。只列工具名字、只展开英文全称，都不够；要说明这个词在 GUI 测试里具体承担什么作用。论文特有缩写按该论文展开，不借别的领域补猜。
