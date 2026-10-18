@@ -622,6 +622,122 @@ LLMDroid在历史GUI操作轨迹构成的图上求路线，重启应用后从起
 
 自编例子：过去走过主页→工具页→测速页，之后可在本地复用该路线，不必每一步付费请求模型；若弹窗或服务端改变流程，历史路线仍会失效。出处：[LLMDroid笔记](notes/wang2025llmdroid.md)，Sec.3.2.2、第10–11页。
 
+<a id="tracedroid-code-signals"></a>
+
+## Suspicious code-level signals / callback backtracking：可疑代码信号与回调反向追踪
+
+TraceDroid把代码规则命中的风险片段、对应GUI控件、上游事件调用链连接成可供探索使用的线索。它先用上下文判断空指针、线程/生命周期等潜在风险，再沿监听器绑定、布局ID和调用关系回溯到用户能操作的入口。例如原文Fig.4以btnSubmit和onClick→validate→saveNote展示提交操作如何进入可能不安全的保存代码。信号提示应优先测试，并不直接证明代码有错；真实崩溃还需运行时异常与进程证据。
+
+出处：[TraceDroid笔记](notes/chen2026tracedroid.md)，Sec.3.1、PDF第5–8页；73条规则涉及1–3个上下文条件，不能简化成只按API名匹配。
+
+<a id="tracedroid-path-monitor"></a>
+
+## Suspicious-path completion / execution-aware monitoring：可疑路径补全与执行监控
+
+TraceDroid将可疑控件接到ATG粗路径，再给模型两跳子图、目标属性、回调条件及动作空间，输出含页面、选择器和操作的JSON序列。先检查图跳转和控件存在性，运行时再比较计划路径、实际动作/界面与系统日志，区分完成、未完成和崩溃，必要时恢复与重试。图上可达或控件存在只是轻量结构检查，不能证明所有数据和业务前置条件已满足。
+
+出处：[TraceDroid笔记](notes/chen2026tracedroid.md)，Sec.3.2.3–3.3.3、PDF第10–12页；论文评价为crash检出，不将监控到冻结/偏离自动扩大为已验证非崩溃oracle。
+
+<a id="guirevive-obsolescence"></a>
+
+## Obsolete GUI test / repair ground truth：过时测试与修复真值
+
+GUIRevive研究旧版可执行、新版因无法定位或操作目标而中断的GUI测试。修复可替换失败控件并在其前补导航，目标是保留原交互功能，不是修改被测应用。其benchmark由随机旧版序列跨版重放构造，人工找新版对应控件作真值；功能已删除、找不到对应控件的案例被排除。评价成功率看找到的控件是否与人工真值一致，不能等同整个测试的断言全部正确。
+
+原文例子：暗色主题从主菜单复选框迁移到设置内选项；旧脚本失败但功能仍在。出处：[GUIRevive笔记](notes/song2026guirevive.md)，Sec.2–3.1、5.1.4，第4–6、14页。
+
+<a id="guirevive-functional-validation"></a>
+
+## Functionality-preserving validation / WES：功能保持验证与控件效果摘要
+
+GUIRevive先要求旧控件和候选在导航、展示、可编辑三种交互角色中一致，再比较各自在对应版本被操作后的可观察功能效果。WES是Widget Effect Summarization，即原操作前后界面变化的文字摘要，给匹配、验证和探索提供语义依据。判断依赖多模态模型，不是源码等价证明，也不是完整业务oracle。
+
+原文暗色主题案例中，打开主题设置页的入口与可直接改变主题的选项角色不同；找到前者不等于完成最终目标修复。出处：[GUIRevive笔记](notes/song2026guirevive.md)，Sec.4.1.3、4.2，第11–12页；案例Fig.3第8–9页。
+
+<a id="guirevive-goal-exploration"></a>
+
+## Goal-guided inter-state exploration / PES：目标引导的跨状态探索与历史摘要
+
+GUIRevive当前页找不到有效修复候选时，以旧交互的功能效果为目标，依据当前可操作控件、已有路径摘要选择下一个入口或返回。每步后用操作前后截图和控件局部图生成简短效果描述，按顺序追加为Past Exploration Summarization相关历史；避免重复同一路径，必要时回退。默认最多15探索步。这里的状态包含弹窗、抽屉等，并非每次都进入新Activity。
+
+原文Permission Manager X需要从主菜单转到Settings、Theming和主题选项，逐状态寻找原暗色功能。目标是恢复旧测试，不是无目标地增加页面覆盖。出处：[GUIRevive笔记](notes/song2026guirevive.md)，Sec.4.3、5.1.3，第12–14页；Fig.3第8–9页。
+
+<a id="tusr-test-unit"></a>
+
+## Test Unit（测试单元）与多对多脚本修复
+
+TUSR 的测试单元是 GUI 脚本中一段**连续、共同完成单一测试意图**的操作，不是函数级“单元测试”。例如旧版 ConnectBot 用“点协议下拉框→选telnet”两步切换协议，新版改成“Add host→点协议字段→选telnet”三步；修复应对齐整段意图，不强求每个旧操作恰好对应一个新操作。单元的最小边界有解释空间，作者用LLM切分并以导航、对话框和输入隔离规则纠正。出处：[TUSR笔记](notes/cao2026tusr.md)，Sec.2–3.2，PDF第3–9页。
+
+<a id="tusr-intention-preservation"></a>
+
+## 脚本修复中的原意图保持
+
+修复正确需要新版操作仍在测试旧版原来要检验的事情；仅“找到了按钮”“脚本跑完”“最终画面一样”都不足以单独证明。例如旧脚本故意先输入、清空、再改值，修复器若只输入最终值，可能绕过本来要测的编辑过程。TUSR通过输入操作隔离局部约束这一风险，但运行时完成标志仍由LLM判断；其结果正确性在实验中另由三名学生对照旧版意图核查。该评价不是应用没有产品缺陷的oracle。出处：[TUSR笔记](notes/cao2026tusr.md)，Sec.3.2.2、3.3及4.2，PDF第8–14页。
+
+<a id="tusr-reflective-memory"></a>
+
+## TUSR的单元级与应用级反思记忆
+
+单元级记忆保存当前测试单元失败尝试的原因分析和下一次的修改建议；应用级记忆用XML识别GUI状态，并记录这个状态中曾出现的无效操作，例如向不可滚动的界面滑动。重试时同时提供当前单元的失败经验和当前状态的无效操作清单，避免把相同错误重复生成。每次尝试超过原单元长度三倍仍未完成，会触发失败反思并回到单元起点；论文没有完整给出全局重试上限或副作用恢复细节。这不是模型训练，也不能自动当作跨应用可迁移记忆。出处：[TUSR笔记](notes/cao2026tusr.md)，Sec.3.1及3.3，PDF第6、9–11页。
+
+<a id="interdroid-inter-app"></a>
+
+## 跨应用功能（inter-app functionality）
+
+多个应用协作完成一个用户目标，如录音应用经系统分享面板调用邮件发送文件，或原应用跳转系统设置取得照片权限。跨应用GUI测试需要在应用切换后保留目标、选择正确外部控件并检查返回过程；不等同于多个Agent或独立测试多个应用。InterDroid调查中的分享、系统设置、第三方服务、信息同步、认证，是其样本的功能分类，不是GUI测试全领域分类。出处：[InterDroid笔记](notes/chen2026interdroid.md)，Sec.1–2，PDF第2–3页。
+
+<a id="interdroid-conversational-memory"></a>
+
+## 对话参考记忆与当前执行记忆
+
+InterDroid的全局记忆把检索到的历史功能改写为用户/助手交替的示例对话，包含目标、截图与动作；局部记忆记录当前会话实际执行的动作和完成状态，二者进入提示上下文。这里没有证明执行模型权重被更新，也不能把历史成功当作当前已观察到的结果。原文录音分享例子中，参考流程进入Gmail，当前记录仍须单独标明本次哪些动作尚未完成。出处：[InterDroid笔记](notes/chen2026interdroid.md)，Sec.3.2、Fig.5–6，PDF第6–7页。
+
+<a id="interdroid-path-metrics"></a>
+
+## 路径完全匹配率（EM）与功能路径覆盖
+
+InterDroid的EM要求生成动作序列与人工参考序列完全一致；页面和动作覆盖衡量跨应用任务探索程度，原文未展开全部集合与替代路线的计分规则。自编例子：两条不同路径都能完成邮件分享，严格序列匹配仍可能只认可参考路径；反之，走对路径也不能证明收件人或后端数据正确。EM、执行完成和缺陷检出应分开报告。出处：[InterDroid笔记](notes/chen2026interdroid.md)，Sec.4.1/4.3及Table1，PDF第8–9页。
+
+<a id="combination-interaction"></a>
+
+## Combination interaction / page-level and widget-level planning：组合交互与两层规划
+
+COMBDroid将同一功能内多个控件依赖配合的流程称为组合交互，例如航班查询须先输入并选择城市，再选日期、滚动填写乘客/舱位，最后确认。一个功能上下文可跨临时弹窗，不等于静态截图，也不是任意跨应用工作流。页面级计划决定依次完成什么，控件级生成根据当前树/截图编号把眼前一步变成一次click/input/scroll；完成后原探索器继续。
+
+出处：[COMBDroid笔记](notes/liu2026combination.md)，Sec.1/Fig.1第2页；Sec.3.1–3.2第4–7页。完成率用于评价执行，不能直接当功能或显示缺陷检出率。
+
+<a id="combdroid-dual-memory"></a>
+
+## Context memory / experience memory：COMBDroid上下文与经验双记忆
+
+上下文记忆针对当前功能记录功能步骤、已填参数、主表单/临时面板状态和最近动作反馈，初始为空，滚动时保留参数，弹窗返回后将选择结果并回主上下文，结束清空。经验记忆则从成功轨迹抽象功能说明、关键界面和通用策略，检索相似经验用于新计划。原文航班例子中，具体城市属于当前参数，打开地点选择→输入→选候选是可复用策略。
+
+出处：[COMBDroid笔记](notes/liu2026combination.md)，Sec.3.3/Fig.6第7–8页。论文明确当前上下文每轮为空，但未充分说明经验库跨应用/重复实验的初始化隔离，不能将两种记忆混为一个清空协议。
+
+<a id="perframe-loading-boundaries"></a>
+
+## Loading start/end frame / FPS：加载边界与帧误差
+
+PerFrame从测试视频定位一次加载的起止帧，统一30FPS，每帧约33.3毫秒；5帧约0.167秒、20帧约0.667秒。一般定义以交互触发首个可见加载响应为起点、主要内容完整且可交互的最早帧为终点；Android实现却以OCR首次识别开发者触摸坐标为起点，两种时间可能不同。单边界误差不等于完整时长误差；原文未分报两端和合并规则。
+
+原文商户页案例经历多次更新，不能在页面框架刚出现时就认作完成。出处：[PerFrame笔记](notes/liu2026perframe.md)，Sec.2.1、3.6.1、4.1.4，第2–3、7–8页。
+
+<a id="perframe-semantic-refinement"></a>
+
+## SSIM pre-selection / semantic refinement：画面相似度预筛与语义细化
+
+PerFrame计算相邻视频帧的结构相似度SSIM，从显著变化附近找稳定候选；随后把候选和末帧参照拼图给多模态模型，判断主要图片文字控件是否加载完，并逐轮缩小采样邻域。SSIM只提出位置，模型区分内容加载与正常动画，最终再复查各轮候选。正文未给完整阈值、窗口及计票规则。
+
+自编教学例：广告GIF持续变动但主要列表已加载，不能一直等整屏像素静止；反之空白占位不动也不代表完成。出处：[PerFrame笔记](notes/liu2026perframe.md)，Sec.3.2–3.5、Fig.4–5，第5–7页。
+
+<a id="perframe-incomplete-load"></a>
+
+## Incomplete loading / observation endpoint：未完成加载与观察终点
+
+PerFrame正常路径将录像末帧当完成页面参照；若模型预先判断末帧仍未加载完，就直接把末帧标成分析结束帧并终止。此输出表示录像观察已结束，不表示应用在该时刻完成；真实耗时可能更长或始终失败。论文弱网99.1%的帧标签符合率受此政策影响，不是独立的真实完成检测率。
+
+自编教学例：30秒录像结束仍转圈，最多可说截至30秒尚未完成，不能报告30秒成功加载。出处：[PerFrame笔记](notes/liu2026perframe.md)，Sec.3.6.3、Table2–3，第7、9页。
+
 ## 维护原则
 
 术语首次出现在笔记的阅读正文时，写中文含义并链接相关解释。只列工具名字、只展开英文全称，都不够；要说明这个词在 GUI 测试里具体承担什么作用。论文特有缩写按该论文展开，不借别的领域补猜。
