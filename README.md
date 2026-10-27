@@ -12,6 +12,22 @@
 
 ## UX 问题驱动探索与 UX oracle：专题入口
 
+### 2026-10-27 补充：移动探索、运行干预与缺陷基准
+
+以下六篇已完成正式全文记录，仍为 `full / extracted`，未运行复现或由用户逐项核对。另为 MemoDroid 建摘要级记录，明确保留全文缺口。各篇正文解释输入、流程、真值、实验分母和对 GUI 测试的具体作用，通用手机任务成功不作为产品缺陷发现率。
+
+| 论文与笔记 | 正式场合 | 阅读用途与边界 |
+|---|---|---|
+| [DroidFixBench](notes/mahmud2026droidfixbench.md) | ISSTA 2026 Research | 真 Android 源码变异及可执行故障资产；原实验测修复，不能把通过测试当语义正确 |
+| [AnTrap](notes/gan2026antrap.md) | EMNLP 2026 Main | 四层十类运行干预；Pass@3、专用/混合训练分开，不是产品故障发现基准 |
+| [D-GARA](notes/chen2026dgara.md) | AAAI 2026 Technical Track | 条件触发可交互中断、状态核验；条件鲁棒率不是两个总成功率相除 |
+| [OS-Genesis](notes/sun2025osgenesis.md) | ACL 2025 Main Long Papers | 局部交互反推任务、重新执行和奖励采样；生成训练轨迹不自动生成测试预期 |
+| [OS-Oracle](notes/wu2026osoracle.md) | CVPR 2026 Main | 错误动作合成、逐步critic与独立人工动作评价；不替代应用业务/UX oracle |
+| [MobileWorld](notes/kong2026mobileworld.md) | ACL 2026 Main Long Papers | 可重置手机/后端和四种成功检查；有动态外部工具依赖，未构造产品故障集 |
+| [MemoDroid](notes/chen2025memodroid.md) | ASE 2025 Research | **abstract / extracted**：只读官方摘要，全文受访问验证限制；三层记忆机制待补正文和原始实验 |
+
+下方是已有更广范围的专题导航，不把本轮补充范围扩大成删去历史论文记录。
+
 以下按实际研究作用组织，重点覆盖2025–2026年工作。**到达目标页面、触发问题、主动复核和最终判错是不同任务**；通用导航成功率不能直接作为UX缺陷发现效果。全部具体机制、数据、版本及局限仍以单篇笔记为准。
 
 | 阅读主题 | 论文与发表场合 | 主要值得比较的机制 | 任务边界 |
