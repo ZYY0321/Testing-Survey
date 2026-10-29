@@ -9,6 +9,7 @@
 | [glossary.md](glossary.md) | GUI testing 术语；阅读笔记遇到生词时查询 |
 | `notes/<id>.md` | 单篇论文的完整分析、实验核对、原文摘录与版本说明 |
 | [examples/](examples/README.md) | 大表写法示例与填写要求；新加一行前先对照这里 |
+| [reviews/](reviews/README.md) | 审稿记录库：投到哪、中没中、审稿人为什么这么判；写自己的论文前对照 |
 
 ## UX 问题驱动探索与 UX oracle：专题入口
 
