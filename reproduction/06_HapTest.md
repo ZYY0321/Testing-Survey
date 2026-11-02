@@ -1,6 +1,6 @@
 # HapTest：鸿蒙源码组30项实测、覆盖率审计与探索失败案例
 
-更新：2026-11-02。全部实验已停止；本文是HapTest唯一综合复现报告。论文学习见 [HapTest note](../notes/liu2025haptest.md)。
+更新：2026-11-02。全部实验已停止；本文是HapTest唯一综合复现报告。论文学习见 [HapTest note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/liu2025haptest.md)。
 
 ## 1. 完成范围与阅读入口
 

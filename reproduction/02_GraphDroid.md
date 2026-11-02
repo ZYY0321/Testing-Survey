@@ -1,6 +1,6 @@
 # GraphDroid：工件已取得，因核心模块缺失未进入本地复现
 
-更新：2026-11-02。本文是本项目唯一复现汇总；论文学习内容见 [GraphDroid note](../notes/li2026graphdroid.md)，证据原件继续保留供追溯。
+更新：2026-11-02。本文是本项目唯一复现汇总；论文学习内容见 [GraphDroid note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/li2026graphdroid.md)，证据原件继续保留供追溯。
 
 ## 当前可以明确说什么
 

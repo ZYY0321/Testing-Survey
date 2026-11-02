@@ -6,7 +6,7 @@
 
 **已在鸿蒙真机完成京东、QQ音乐、淘宝、高德各一轮的实际探索与模型调用，但没有完整复现论文。** 京东、QQ音乐、高德达到约60分钟原生探索预算，随后后台页面审计未排空，最终exit1、产物incomplete；淘宝约33分钟自然结束，exit0，却没有完成一个工具标记的功能测试。自动报告只有京东、高德各1个高置信候选，均未独立重放确认。不能将“高置信”写成真实bug，更不能将有图、进程退出或模型自评完成写成UX验收通过。
 
-- [论文学习note](../notes/he2026funcdroid.md)：讲完整论文方法、表格与原例。
+- [论文学习note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/he2026funcdroid.md)：讲完整论文方法、表格与原例。
 - [本次四应用最终机器记录](http://127.0.0.1:8770/harmony-file?path=user-stop-after-amap-20261102/four-app-results.json)。
 - [正式批次指标CSV](http://127.0.0.1:8770/harmony-file?path=paper-batch-20261102-v3/run-metrics.csv)。该批次还包含其他工具身份，读取时筛FuncDroid四轮。
 - [正式批次原件目录（本地文件）](D:/Projects/实验室/Harmony-Reproduction-Handoff-20261102/workspace/private-runs/paper-batch-20261102-v3)：每轮 `native/ffg.json`、`llm_responses.jsonl`、`llm_usage.json`、`console.log` 与截图。
@@ -18,7 +18,7 @@
 
 FuncDroid认为，分别执行“添加提醒”和“删除提醒”，容易漏掉“添加→删除→重新添加相同时间”的错误。它从界面轨迹构造功能流图FFG：节点代表功能目标、相关数据与轨迹；边代表从一个功能到另一个功能的可执行条件。长时视角LTV通过测试校正功能边界及条件，短时视角STV改变共享数据或操作方式，寻找跨功能错误。模型结合常见错误知识推断预期，形成非崩溃候选；这种模型预期仍不等同应用规格。
 
-例如论文血压应用中，BMI提醒被错误显示成血糖提醒；删除后再次添加相同时间仍提示重复。前者是类型/显示内容一致性，后者是跨入口的历史数据状态错误。它们支持“功能都访问过仍可能漏掉组合”的动机，不能概括为纯视觉截断缺陷。完整原例和方法条件在 [note](../notes/he2026funcdroid.md)；[公开实现README](https://github.com/SQUARE-RG/FuncDroid)另外区分了论文研究设计与当前可运行实现。
+例如论文血压应用中，BMI提醒被错误显示成血糖提醒；删除后再次添加相同时间仍提示重复。前者是类型/显示内容一致性，后者是跨入口的历史数据状态错误。它们支持“功能都访问过仍可能漏掉组合”的动机，不能概括为纯视觉截断缺陷。完整原例和方法条件在 [note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/he2026funcdroid.md)；[公开实现README](https://github.com/SQUARE-RG/FuncDroid)另外区分了论文研究设计与当前可运行实现。
 
 | 项目 | 论文原协议 | 我们实际执行 |
 |---|---|---|

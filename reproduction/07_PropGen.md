@@ -8,7 +8,7 @@
 
 对UX testing的最明确结论是：PropGen能自动提供“到哪操作、怎样操作、检查什么”的候选，但本批检查主要是控件存在、弹窗关闭和文本包含，不能可靠代表截断、遮挡、排版或功能正确性。实际坏例已经定位到源轨迹和代码：返回桌面后被框架重新拉起的现象被归给BACK；Rotate被归纳成刷新；移动文件的后置只检查对话框消失。这些是测试生成链的缺点证据，不能反过来算成被测App缺陷。
 
-- [论文学习note](../notes/xiong2026propgen.md)：解释论文原理及正式版各表。
+- [论文学习note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/xiong2026propgen.md)：解释论文原理及正式版各表。
 - [官方论文页面](https://conf.researchr.org/details/ase-2026/ase-2026-research-track/240/PropGen-Automated-Property-Generation-for-Property-Based-Testing-of-Mobile-Apps)、[正式DOI](https://doi.org/10.1145/3832783.3837536)、[作者工件](https://doi.org/10.5281/zenodo.21770804)。本次补查官方摘要确认完整方法包含探索、合成、精化三部分；预印本题名不同，百分比以正式版及实际算式为准。
 - [本地逐次记录网站](http://127.0.0.1:8770)：选07_PropGen与相应run，可查看完整请求、回答、输入图片和执行证据。
 - [OmniNotes生成原件](http://127.0.0.1:8770/file?path=07_PropGen/runs/20261101_152423_44daef/experiment-report.zh.md)、[Markor生成及恢复原件](http://127.0.0.1:8770/file?path=07_PropGen/runs/20261101_175742_cc322c/experiment-report.zh.md)。
@@ -116,7 +116,7 @@ Markor最初因all-files特殊许可未恢复停在权限页；12:36:30仅恢复
 | 新功能缺陷 | 25，研究者复现；当时5已修复 | 0个独立确认目标App产品缺陷 | 可报告确认状态，不能推断召回0% |
 | 运行范围 | 12App×生成3h+测试6h | 2App生成；1App完整有效测试+1早停 | 仅部分协议完成 |
 
-论文25个缺陷分为无效果12、状态不一致6、错误行为4、导航失败3，并非25个视觉布局缺陷。官方摘要支持核心总计；详细数值采用[已核对正式版note](../notes/xiong2026propgen.md)的表2–5。在线预印本正文曾把118/127写成93.7%，算术为92.91%，这里不沿用错误百分比。跨模型、两App子集和缺人工条件下，将本批结果与论文全量数字排成强弱榜没有依据。
+论文25个缺陷分为无效果12、状态不一致6、错误行为4、导航失败3，并非25个视觉布局缺陷。官方摘要支持核心总计；详细数值采用[已核对正式版note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/xiong2026propgen.md)的表2–5。在线预印本正文曾把118/127写成93.7%，算术为92.91%，这里不沿用错误百分比。跨模型、两App子集和缺人工条件下，将本批结果与论文全量数字排成强弱榜没有依据。
 
 ## 8. 对UX testing的探索能力与覆盖率判断
 

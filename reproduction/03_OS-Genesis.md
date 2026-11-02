@@ -2,7 +2,7 @@
 
 更新：2026-11-02。本文合并本项目的复现方式、过程、结果、失败诊断和 AB 分析，作为唯一项目说明。原始实验记录保留用于追溯，不要求读者先读那些分散报告。
 
-[论文学习 note](../notes/sun2025osgenesis.md) · [正式论文](https://aclanthology.org/2025.acl-long.277/) · [官方代码](https://github.com/OS-Copilot/OS-Genesis) · [本机按任务阅览](http://127.0.0.1:8770/osgenesis) · [八项目总目录](catalog.md)
+[论文学习 note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/sun2025osgenesis.md) · [正式论文](https://aclanthology.org/2025.acl-long.277/) · [官方代码](https://github.com/OS-Copilot/OS-Genesis) · [本机按任务阅览](http://127.0.0.1:8770/osgenesis) · [八项目总目录](catalog.md)
 
 ## 1. 这篇论文到底解决什么，我们完成到了哪里
 

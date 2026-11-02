@@ -10,7 +10,7 @@ TimePlanner最高去重方法覆盖为2946/23280=12.6546%；Fing唯一完整轮�
 
 最有价值的探索bad case包括：原UTG（界面转移图）删掉根节点唯一出边后，无路径异常使程序提前结束；教学浮层在前台时，底栏目标虽产生事件但没有实际切换；长按出现编辑菜单而stateID不变。这些是导航鲁棒性、动作效果与状态抽象的具体证据。Fing已到达注册/重置密码白屏和破图现场，但只是离线AI发现的候选，LLMDroid本身没有自动UX判错模块。
 
-- [论文note](../notes/wang2025llmdroid.md)：原理、表3/4、Activity与方法覆盖的区别。
+- [论文note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/wang2025llmdroid.md)：原理、表3/4、Activity与方法覆盖的区别。
 - [正式DOI](https://doi.org/10.1145/3715763)、[作者托管PDF](https://tmliu06.github.io/pdfs/llmdroid-fse2025.pdf)、[官方代码与材料](https://github.com/security-pride/LLMDroid)、[官方适配说明](https://github.com/security-pride/LLMDroid/blob/main/documents/Adapting_LLMDroid_to_Other_Tools.md)。本次独立搜索核查官方工具确实以实时覆盖反馈触发LLM，不将其描述为逐步视觉Agent。
 - [本地LLMDroid网站](http://127.0.0.1:8770/llmdroid?run=20261102-161743)：保留旧5run与TimePlanner新3run，展示文字I/O、动作前后原图、覆盖、簇与报告。
 - [Fing/Wiki队列原件](http://127.0.0.1:8770/file?path=08_LLMDroid/runs/R3_QUEUE_20261101-164000/experiment-report.zh.md)、[TimePlanner完整原件](http://127.0.0.1:8770/file?path=08_LLMDroid/runs/R3_TIMEPLANNER_20261102-140915/experiment-report.zh.md)。
@@ -107,7 +107,7 @@ TimePlanner793个事件文件中792可解析，首轮event_2026-11-02_151639.jso
 
 ## 7. 与论文效果的对比：为什么不能拿一个22.85%说超过论文
 
-[论文note](../notes/wang2025llmdroid.md)逐列核对正式表3/4，原数据包含14App汇总、三次取最高、不同运行月份。下面是同类指标的定位，不组成统一排名。
+[论文note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/wang2025llmdroid.md)逐列核对正式表3/4，原数据包含14App汇总、三次取最高、不同运行月份。下面是同类指标的定位，不组成统一排名。
 
 | 论文范围/配置 | 方法覆盖 | Activity覆盖 | 本次对应状态 |
 |---|---:|---:|---|

@@ -4,7 +4,7 @@
 
 ## 1. 阅读入口与证据
 
-- [论文学习 note](../notes/xiang2026uilens.md)：从任务定义、提示规则到原论文各项实验；本文承担实际复现和 AB 分析。
+- [论文学习 note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/xiang2026uilens.md)：从任务定义、提示规则到原论文各项实验；本文承担实际复现和 AB 分析。
 - [本地实验查看器](http://127.0.0.1:8770)：选择 `04_UI-Lens → QWEN_R7_200x2_20261101_FORMAL_03`，可逐例看实际图像、输入和回答。
 - 本文以下证据路径相对工作区；远程数据查看入口由[总目录](catalog.md)统一维护。`127.0.0.1`仅表示读者本机服务，不是公开托管地址。
 - [最终任务与预测索引](http://127.0.0.1:8770/file?path=04_UI-Lens/runs/QWEN_R7_200x2_20261101_FORMAL_03/case-index.json)、[逐例 CSV](http://127.0.0.1:8770/file?path=04_UI-Lens/runs/QWEN_R7_200x2_20261101_FORMAL_03/results.csv)、[重复一致性](http://127.0.0.1:8770/file?path=04_UI-Lens/runs/QWEN_R7_200x2_20261101_FORMAL_03/repeat-agreement.json)、[全尝试用量账本](http://127.0.0.1:8770/file?path=04_UI-Lens/runs/QWEN_R7_200x2_20261101_FORMAL_03/usage-ledger.json)。原数据在 D 盘项目目录，不能将 E 盘其他项目迁移备份当作本项目新结果。

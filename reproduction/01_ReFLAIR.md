@@ -4,7 +4,7 @@
 
 ## 1. 阅读与数据入口
 
-- [论文 note](../notes/he2026reflair.md)：原文机制、实验和局限；[作者正式 PDF](https://ics.uci.edu/~seal/publications/2026_FSE.pdf)、[官方工件仓库](https://github.com/seal-hub/ReFLAIR)。本次独立检索并打开了作者 PDF 与工件页，核查了任务为响应式重排检测、包含主动探索的定位。
+- [论文 note](https://github.com/ZYY0321/Testing-Survey/blob/main/notes/he2026reflair.md)：原文机制、实验和局限；[作者正式 PDF](https://ics.uci.edu/~seal/publications/2026_FSE.pdf)、[官方工件仓库](https://github.com/seal-hub/ReFLAIR)。本次独立检索并打开了作者 PDF 与工件页，核查了任务为响应式重排检测、包含主动探索的定位。
 - [本地查看器](http://127.0.0.1:8770)：选择 `01_ReFLAIR`，按下表 run 查看实际输入图、HTML、动作和原始回答。localhost 仅指本机；远程材料入口由[总目录](catalog.md)统一维护。
 - [执行链台账](http://127.0.0.1:8770/file?path=01_ReFLAIR/runs/20261101-213309-s18-check/pipeline-ledger.json)、[最终原生审阅包](http://127.0.0.1:8770/file?path=01_ReFLAIR/comparison-baselines/20261101-transport-audited-retry/subject_20261101-200435/0_final_manual_data.json)、[候选与 GT 对象对应](http://127.0.0.1:8770/file?path=01_ReFLAIR/runs/20261101-214302-s18-explore/offline-ai-audit/candidate-GT-ai-mapping.json)。GT 指独立标注的标准答案，不是模型自述。
 - 当前 `01_ReFLAIR/runs`、`comparison-baselines` 的 D 盘入口通过 junction 指向 E 盘活跃数据；迁移前目录保留为备份。路径名相同的备份不得重复计为新的实验。
