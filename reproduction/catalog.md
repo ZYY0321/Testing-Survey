@@ -60,7 +60,7 @@ B线的直接材料是UI-Lens的混淆矩阵与持续误报漏报、ReFLAIR的�
 - [本机八项目报告入口](http://127.0.0.1:8770/summary)
 - [本机原始记录站](http://127.0.0.1:8770/)
 - [Testing-Survey报告目录](https://github.com/ZYY0321/Testing-Survey/tree/main/reproduction)
-- [新实验数据仓库（私有）](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102)已创建，工作目录为 `E:/LabReproArchive/gui-testing-reproduction-20261102`。报告快照、查看器和专项看图账本已上传；完整实验包正在逐项目校验上传，最终以该库 `PUBLISH_STATUS.json` 为准。
+- [新实验数据仓库（私有）](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102)已创建，工作目录为 `E:/LabReproArchive/gui-testing-reproduction-20261102`。报告快照、查看器和专项看图账本已上传；完整实验数据按12组分卷管理，上传完整性、逐文件校验与独立还原网页验收的当前结论以[发布状态 PUBLISH_STATUS.json](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102/blob/main/PUBLISH_STATUS.json)为准。
 
 远程数据仓库默认私有，保存按项目分类的代码、实验数据与查看器发布副本。原始证据不移动、不删除；凭据、私钥与受限华为截断数据不上传。大数据归档与网页代码分别管理，下载后可按文档启动查看器，查看器能读到数据才算相应验证完成。
 
