@@ -41,7 +41,7 @@ B线的直接材料是UI-Lens的混淆矩阵与持续误报漏报、ReFLAIR的�
 |---|---|---|---|
 |OS-Genesis|原冻结20任务，41源图|正常网格反馈、键盘/弹窗、错误目标对象与初态漂移|非20独立UX条件，不从RM反推UX检测|
 |LLMDroid|TimePlanner20精确前后、Fing10组邻近对照；60源图位置|Fing有7组白正文/破图疑似现场；教程/菜单/空数据负例单列|7组不等于7bug；邻近帧不假称精确动作因果|
-|PropGen|两App各10性质端点，共40图|图文长内容、清单、输入键盘、日期/信息弹窗与横屏；低对比和日期语义候选|端点不等于完整功能过程；正常视口裁切不确认为截断|
+|PropGen|两App各10性质端点，共40图|图文长内容、清单、输入键盘、日期/信息弹窗与横屏；低对比候选，以及后续前序核查支持的日期摘要矛盾|端点不等于完整功能过程；正常视口裁切不确认为截断|
 |FuncDroid|四App各3组，共24图位置|输入/搜索/弹层/商品标题边界等实际状态|商品标题裁止未做可获得性验证，不确认缺陷|
 |HapTest|10App首组+Swiper诊断补组，共24图位置|联系人输入、模态、正常摘要省略、滑动接口失败|失败事件没有after图，不用临近成功图伪造|
 |UI-Lens|五类×原标签正负，新增10图|片名内部截断vs屏末露边、短设置省略vs长备注省略等边界|解释性取样非无偏准确率重估|
@@ -66,3 +66,5 @@ B线的直接材料是UI-Lens的混淆矩阵与持续误报漏报、ReFLAIR的�
 
 
 数据仓库项目读取路径：Android/Web准备与实测均恢复到 `projects/01_ReFLAIR` 至 `projects/08_LLMDroid`；鸿蒙最新实测恢复到 `harmony/workspace/private-runs/paper-batch-20261102-v3`（FuncDroid）与 `harmony/workspace/private-runs/open-rq1-transport`（HapTest）。[分卷下载入口](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102/releases/tag/archive-20261102)中的主包与两个supplemental补包需配套使用；网页启动与按项目下载命令见数据仓库README。查看器仅绑定阅读者本机，GitHub仓库文件页本身不是Python服务托管。
+
+进一步定向诊断：PropGen的OmniNotes普通“每天重复”流程出现2026起始/1969截止的可见摘要矛盾；原模型复述该值仍判完成，生成性质仅检查Daily。详见唯一PropGen报告末节，实际调度与根因运行时验证仍未知；它属于五类显示错误之外的语义体验反例。
