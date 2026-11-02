@@ -157,7 +157,7 @@ Canvas、Msea、OhBill部分轮原生ExitEvent提前结束，没有补满预算�
 
 此前本轮代理实际新看只有京东water输入图1张、高德协议候选2张，共3次view_image；上文其他历史逐图草稿不应被误读为本轮已经全部重看。收到专项要求后先冻结代表样本，再逐对调用view_image查看原像素，核对原动作；没有调用设备、模型或补拍。本项目新看12对、24次原图展示，23个路径、23种SHA256内容。主样本固定每App r1首个目标→目标且前后原图均存在的事件，共10对；另取首个真实ScrollEvent的Swiper对图，再针对已知失败查看最后成功序列化事件对图。后两项是机制诊断，不能并入随机抽样。
 
-账本：[本地冻结方案](../tmp/harmony-ux-review-20261102/plan.json)、[逐项新观察、动作与hash](../tmp/harmony-ux-review-20261102/review-ledger.json)。这两份是本地审计附件；主要结论和原图链接已全部写入本文，阅读不依赖另开总结文档。
+账本：[本地冻结方案](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102/blob/main/audit/harmony-ux-review-20261102/plan.json)、[逐项新观察、动作与hash](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102/blob/main/audit/harmony-ux-review-20261102/review-ledger.json)。这两份是本地审计附件；主要结论和原图链接已全部写入本文，阅读不依赖另开总结文档。
 
 ### 按原动作核对的观察
 
@@ -195,7 +195,7 @@ Swiper补查区分了两个结果：首个ScrollEvent能看到轮播改变；末
 
 ## 《待跑的实验》问题与现有数据的逐项回答
 
-对应 [原实验要求](../方向与实验/待跑的实验.md)R2、“不用大模型的对照”及SE2-b；后续用户取消项不恢复为待自动执行计划。
+对应 [原实验要求](https://github.com/ZYY0321/Testing-Survey/blob/main/方向与实验/待跑的实验.md)R2、“不用大模型的对照”及SE2-b；后续用户取消项不恢复为待自动执行计划。
 
 | 原计划问题 | 当前数据的答案 | 缺失证据与结论边界 |
 |---|---|---|

@@ -128,7 +128,7 @@ Windows中文绝对路径使OpenCV读取失败，外部启动器改用同目录A
 
 此前本轮代理实际新看只有京东water输入图1张、高德协议候选2张，共3次view_image；上文其他历史逐图草稿不应被误读为本轮已经全部重看。收到专项要求后先冻结代表样本，再逐对调用view_image查看原像素，核对原动作；没有调用设备、模型或补拍。本项目新看12对、24次原图展示，24个路径、23种SHA256内容；每App3对。规则为原截图索引中相邻、同phase、后条明确observes_result_of_step等于前条step的对图，依次取首个输入、滚动、点击类别；缺类别取中部可用对，明确不假称该类别存在。淘宝无滚动类别，实际看返回动作；QQ音乐无文本输入类别，实际看拖进度条。
 
-账本：[本地冻结方案](../tmp/harmony-ux-review-20261102/plan.json)、[逐项新观察、动作与hash](../tmp/harmony-ux-review-20261102/review-ledger.json)。这两份是本地审计附件；主要结论和原图链接已全部写入本文，阅读不依赖另开总结文档。
+账本：[本地冻结方案](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102/blob/main/audit/harmony-ux-review-20261102/plan.json)、[逐项新观察、动作与hash](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102/blob/main/audit/harmony-ux-review-20261102/review-ledger.json)。这两份是本地审计附件；主要结论和原图链接已全部写入本文，阅读不依赖另开总结文档。
 
 ### 按原动作核对的观察
 
@@ -164,7 +164,7 @@ Windows中文绝对路径使OpenCV读取失败，外部启动器改用同目录A
 
 ## 《待跑的实验》问题与现有数据的逐项回答
 
-本节对应仓库 [原实验要求](../方向与实验/待跑的实验.md)第零步R1、SE2-b及功能状态分析。文件中的旧模型/平台要求若与后来用户决定冲突，以本次真实协议为准；不为完成AI清单补改论文方法。
+本节对应仓库 [原实验要求](https://github.com/ZYY0321/Testing-Survey/blob/main/方向与实验/待跑的实验.md)第零步R1、SE2-b及功能状态分析。文件中的旧模型/平台要求若与后来用户决定冲突，以本次真实协议为准；不为完成AI清单补改论文方法。
 
 | 原计划要回答的问题 | 现有数据给出的答案 | 仍缺什么，因而不能回答什么 |
 |---|---|---|
