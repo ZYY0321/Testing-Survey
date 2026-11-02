@@ -60,6 +60,9 @@ B线的直接材料是UI-Lens的混淆矩阵与持续误报漏报、ReFLAIR的�
 - [本机八项目报告入口](http://127.0.0.1:8770/summary)
 - [本机原始记录站](http://127.0.0.1:8770/)
 - [Testing-Survey报告目录](https://github.com/ZYY0321/Testing-Survey/tree/main/reproduction)
-- 新实验数据仓库计划路径：`SEKIROYUSHI/gui-testing-reproduction-20261102`。此处提前保留稳定名称，创建/上传/网站验证状态将在第三阶段更新；尚未完成前不称数据已远程可读。
+- [新实验数据仓库（私有）](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102)已创建，工作目录为 `E:/LabReproArchive/gui-testing-reproduction-20261102`。报告快照、查看器和专项看图账本已上传；完整实验包正在逐项目校验上传，最终以该库 `PUBLISH_STATUS.json` 为准。
 
 远程数据仓库默认私有，保存按项目分类的代码、实验数据与查看器发布副本。原始证据不移动、不删除；凭据、私钥与受限华为截断数据不上传。大数据归档与网页代码分别管理，下载后可按文档启动查看器，查看器能读到数据才算相应验证完成。
+
+
+数据仓库项目读取路径：Android/Web准备与实测均恢复到 `projects/01_ReFLAIR` 至 `projects/08_LLMDroid`；鸿蒙最新实测恢复到 `harmony/workspace/private-runs/paper-batch-20261102-v3`（FuncDroid）与 `harmony/workspace/private-runs/open-rq1-transport`（HapTest）。[分卷下载入口](https://github.com/SEKIROYUSHI/gui-testing-reproduction-20261102/releases/tag/archive-20261102)中的主包与两个supplemental补包需配套使用；网页启动与按项目下载命令见数据仓库README。查看器仅绑定阅读者本机，GitHub仓库文件页本身不是Python服务托管。
