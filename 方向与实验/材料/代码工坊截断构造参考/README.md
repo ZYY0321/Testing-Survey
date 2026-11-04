@@ -16,6 +16,8 @@ cd sample_in_harmonyos && git checkout bcc6b03
 git apply 截断注入.patch     # 本目录下的补丁
 ```
 
+然后按上游 README 第五节运行：DevEco Studio 打开工程、等 Sync 完成，运行入口选 phone（折叠屏也选 phone），签名后运行。不需要我们本地的整个工程（6.4 GB，其中 3.8 GB 是 `submodules/` 里集成的其他示例 App，2 GB 是编译产物）：不下载那些示例也能运行本体，只是"样例"模块里点不进具体示例；要全量功能，运行仓库自带的下载脚本 `hmosword-build`。
+
 ## 本目录有什么
 
 | 文件 | 内容 |
