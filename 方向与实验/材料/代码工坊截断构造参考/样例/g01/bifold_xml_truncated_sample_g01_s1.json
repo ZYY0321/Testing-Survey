@@ -1,0 +1,35 @@
+{
+  "version": "7.0.4",
+  "flags": {
+    "正常图": false
+  },
+  "shapes": [
+    {
+      "label": "截断-文字",
+      "points": [
+        [
+          344.52,
+          2138.416
+        ],
+        [
+          735.48,
+          2163.456
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {
+        "top": false,
+        "bottom": true,
+        "left": false,
+        "right": false
+      },
+      "mask": null
+    }
+  ],
+  "imagePath": "bifold_xml_truncated_sample_g01_s1.jpg",
+  "imageData": null,
+  "imageHeight": 2504,
+  "imageWidth": 1080
+}

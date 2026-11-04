@@ -1,0 +1,58 @@
+{
+  "version": "7.0.4",
+  "flags": {
+    "正常图": false
+  },
+  "shapes": [
+    {
+      "label": "截断-组件",
+      "points": [
+        [
+          49.68,
+          2351.256
+        ],
+        [
+          1030.32,
+          2416.36
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {
+        "top": false,
+        "bottom": true,
+        "left": false,
+        "right": false
+      },
+      "mask": null
+    },
+    {
+      "label": "截断-文字",
+      "points": [
+        [
+          490.32,
+          2388.816
+        ],
+        [
+          587.5200000000001,
+          2416.36
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {
+        "top": false,
+        "bottom": true,
+        "left": false,
+        "right": false
+      },
+      "mask": null
+    }
+  ],
+  "imagePath": "bifold_xml_truncated_sample_g04_s1.jpg",
+  "imageData": null,
+  "imageHeight": 2504,
+  "imageWidth": 1080
+}

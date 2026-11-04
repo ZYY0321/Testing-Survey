@@ -1,0 +1,58 @@
+{
+  "version": "7.0.4",
+  "flags": {
+    "正常图": false
+  },
+  "shapes": [
+    {
+      "label": "截断-文字",
+      "points": [
+        [
+          0.0,
+          1457.328
+        ],
+        [
+          29.16,
+          1504.904
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {
+        "top": false,
+        "bottom": false,
+        "left": true,
+        "right": false
+      },
+      "mask": null
+    },
+    {
+      "label": "截断-文字",
+      "points": [
+        [
+          967.6800000000001,
+          1457.328
+        ],
+        [
+          1080.0,
+          1504.904
+        ]
+      ],
+      "group_id": null,
+      "description": "",
+      "shape_type": "rectangle",
+      "flags": {
+        "top": false,
+        "bottom": false,
+        "left": false,
+        "right": true
+      },
+      "mask": null
+    }
+  ],
+  "imagePath": "bifold_xml_truncated_sample_g05_s1.jpg",
+  "imageData": null,
+  "imageHeight": 2504,
+  "imageWidth": 1080
+}
